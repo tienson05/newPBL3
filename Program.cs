@@ -7,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 //// Đăng ký dịch vụ UserRepository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 // Đăng ký AccountService vào DI container
 builder.Services.AddScoped<AccountService>();
 

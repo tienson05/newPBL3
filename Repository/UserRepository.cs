@@ -9,31 +9,35 @@ namespace HeThongMoiGioiDoCu.Repository
     {
         public async Task AddUserAsync(User user)
         {
-            string sql = "INSERT INTO users (Username, Email, PasswordHash, Fullname, Gender, DateOfBirth, PhoneNumber, Address, ProfilePictureurl, Role, IsActive) VALUES ('";
+            string sql = "INSERT INTO Users (Username, Gmail, PasswordHash, Name, Gender, Balance, TotalPosts, Rating, Status, BirthOfDate, PhoneNumber, Address, AvatarUrl, Role, IsVerified) VALUES ('";
             sql += user.Username + "', '";
-            sql += user.Email + "', '";
+            sql += user.Gmail + "', '";
             sql += user.PasswordHash + "', '";
-            sql += user.Fullname + "', '";
-            sql += (user.Gender ? "1" : "0") + "', '"; 
-            sql += user.DateOfBirth.ToString("yyyy-MM-dd HH:mm:ss") + "', '";
+            sql += user.Name + "', '";
+            sql += user.Gender + "', '";
+            sql += user.Balance + "', '";
+            sql += user.TotalPosts + "', '";
+            sql += user.Rating + "', '";
+            sql += user.Status + "', '";
+            sql += user.BirthOfDate.ToString("yyyy-MM-dd HH:mm:ss") + "', '";
             sql += user.PhoneNumber + "', '";
             sql += user.Address + "', '";
-            sql += user.ProfilePictureUrl + "', '";
+            sql += user.AvatarUrl + "', '";
             sql += user.Role + "', '";
-            sql += user.IsActive + "')";
+            sql += user.IsVerified + "')";
 
             DBHelper.Instance.ExecuteDB(sql);
         }
 
         public async Task DeleteUserAsync(int id)
         {
-            string sql = "DELETE FROM Users WHERE Id = '" + id + "'";
+            string sql = "DELETE FROM Users WHERE UserID = '" + id + "'";
             DBHelper.Instance.ExecuteDB(sql);
         }
 
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            string sql = "SELECT * FROM users WHERE email = '" + email + "'";
+            string sql = "SELECT * FROM Users WHERE Gmail = '" + email + "'";
             var user = DBHelper.Instance.GetRecords(sql);
             if(user != null && user.Rows.Count > 0)
             {
@@ -43,8 +47,8 @@ namespace HeThongMoiGioiDoCu.Repository
                     {
                         Username = row["Username"].ToString(),
                         PasswordHash = row["PasswordHash"].ToString(),
-                        Email = row["Email"].ToString(),
-                        Fullname = row["Fullname"].ToString(),
+                        Gmail = row["Gmail"].ToString(),
+                        Name = row["Name"].ToString(),
                     };
                 }
             }
@@ -53,7 +57,7 @@ namespace HeThongMoiGioiDoCu.Repository
 
         public async Task<User> GetUserByIdAsync(int id)
         {
-            string sql = "SELECT * FROM Users WHERE Id  = " + id + "";
+            string sql = "SELECT * FROM Users WHERE UserID  = " + id + "";
             var user = DBHelper.Instance.GetRecords(sql);
             if (user != null && user.Rows.Count > 0 )
             {
@@ -61,20 +65,26 @@ namespace HeThongMoiGioiDoCu.Repository
                 {
                     return new User
                     {
-                        Id = Convert.ToInt32(row["Id"]),
+                        UserID = Convert.ToInt32(row["UserID"]),
                         Username = row["Username"].ToString(),
-                        Email = row["Email"].ToString(),
+                        Gmail = row["Gmail"].ToString(),
                         PasswordHash = row["PasswordHash"].ToString(),
-                        Fullname = row["Fullname"].ToString(), 
-                        Gender = Convert.ToBoolean(row["Gender"]),
-                        DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]),
+                        Name = row["Name"].ToString(), 
+                        Gender = row["Gender"].ToString(),
+                        BirthOfDate = Convert.ToDateTime(row["BirthOfDate"]),
                         PhoneNumber = row["PhoneNumber"].ToString(),
                         Address = row["Address"].ToString(),
-                        ProfilePictureUrl = row["ProfilePictureUrl"].ToString(),
-                        IsActive = Convert.ToBoolean(row["IsActive"]),
+                        AvatarUrl = row["AvatarUrl"].ToString(),
+                        Status = row["Status"].ToString(),
                         Role = row["Role"].ToString(),
-                        UpdateAt = Convert.ToDateTime(row["UpdateAt"]),
-                        CreateAt = Convert.ToDateTime(row["UpdateAt"]),
+                        Balance = Convert.ToDouble(row["Balance"]),
+                        TotalPosts = Convert.ToInt32(row["TotalPosts"]),
+                        TotalPurchases = Convert.ToInt32(row["TotalPurchases"]),
+                        Rating = Convert.ToDouble(row["Rating"]),
+                        IsVerified = Convert.ToBoolean(row["IsVerified"]),
+                        //LastLoginAt = Convert.ToDateTime(row["LastLoginAt"]),
+                        UpdateAt = Convert.ToDateTime(row["UpdatedAt"]),
+                        CreateAt = Convert.ToDateTime(row["CreatedAt"]),
                     };
                 }
             }
@@ -86,26 +96,26 @@ namespace HeThongMoiGioiDoCu.Repository
         {
             string sql = @"UPDATE Users SET
                     Username = @Username,
-                    Email = @Email,
-                    Fullname = @Fullname,
+                    Gmail = @Gmail,
+                    Name = @Name,
                     Gender = @Gender,
-                    DateOfBirth = @DateOfBirth,
+                    BirthOfDate = @BirthOfDate,
                     PhoneNumber = @PhoneNumber,
                     Address = @Address,
-                    ProfilePictureUrl = @ProfilePictureUrl,
-                    UpdateAt = GETDATE()
-                    WHERE Id = @Id";
+                    AvatarUrl = @AvatarUrl,
+                    UpdatedAt = GETDATE()
+                    WHERE UserID = @UserID";
             var parameters = new SqlParameter[]
             {
                 new SqlParameter("@Username", user.Username),
-                new SqlParameter("@Email", user.Email),
-                new SqlParameter("@Fullname", user.Fullname),
+                new SqlParameter("@Gmail", user.Gmail),
+                new SqlParameter("@Name", user.Name),
                 new SqlParameter("@Gender", user.Gender),
-                new SqlParameter("@DateOfBirth", user.DateOfBirth),
+                new SqlParameter("@BirthOfDate", user.BirthOfDate),
                 new SqlParameter("@PhoneNumber", user.PhoneNumber),
                 new SqlParameter("@Address", user.Address),
-                new SqlParameter("@ProfilePictureUrl", user.ProfilePictureUrl),
-                new SqlParameter("@Id", user.Id)
+                new SqlParameter("@AvatarUrl", user.AvatarUrl),
+                new SqlParameter("@UserID", user.UserID)
             };
 
             DBHelper.Instance.ExecuteDB(sql, parameters);
@@ -115,29 +125,29 @@ namespace HeThongMoiGioiDoCu.Repository
         {
             string sql = @"UPDATE Users SET
                     Username = @Username,
-                    Email = @Email,
-                    Fullname = @Fullname,
+                    Gmail = @Gmail,
+                    Name = @Name,
                     Gender = @Gender,
-                    DateOfBirth = @DateOfBirth,
+                    BirthOfDate = @BirthOfDate,
                     PhoneNumber = @PhoneNumber,
                     Address = @Address,
-                    ProfilePictureUrl = @ProfilePictureUrl,
-                    IsActive = @IsActive,
+                    ProfilePictureUrl = @AvatarUrl,
+                    Status = @Status,
                     Role = @Role,
-                    UpdateAt = GETDATE()
-                    WHERE Id = @Id";
+                    UpdatedAt = GETDATE()
+                    WHERE UserID = @UserID";
             var parameters = new SqlParameter[] {
                 new SqlParameter("@Username", user.Username),
-                new SqlParameter("@Email", user.Email),
-                new SqlParameter("@Fullname", user.Fullname),
+                new SqlParameter("@Gmail", user.Gmail),
+                new SqlParameter("@Name", user.Name),
                 new SqlParameter("@Gender", user.Gender),
-                new SqlParameter("@DateOfBirth", user.DateOfBirth),
+                new SqlParameter("@BirthOfDate", user.BirthOfDate),
                 new SqlParameter("@PhoneNumber", user.PhoneNumber),
                 new SqlParameter("@Address", user.Address),
-                new SqlParameter("@ProfilePictureUrl", user.ProfilePictureUrl),
+                new SqlParameter("@AvatarUrl", user.AvatarUrl),
                 new SqlParameter("@Role", user.Role),
-                new SqlParameter("@IsActive", user.IsActive),
-                new SqlParameter("@Id", user.Id)
+                new SqlParameter("@Status", user.Status),
+                new SqlParameter("@UserID", user.UserID)
             };
 
             DBHelper.Instance.ExecuteDB (sql, parameters);

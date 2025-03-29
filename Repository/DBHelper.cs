@@ -9,7 +9,7 @@ namespace HeThongMoiGioiDoCu.Repository
         private static DBHelper _Instance;
 
         private SqlConnection cnn;
-        private static string connectionString = @"Server=TIENSON;Database=HTMGDC;Integrated Security=True;TrustServerCertificate=True;";
+        private static string connectionString = @"Server=TIENSON;Database=OldGoodsMarketplace;Integrated Security=True;TrustServerCertificate=True;";
 
         public static DBHelper Instance
         {

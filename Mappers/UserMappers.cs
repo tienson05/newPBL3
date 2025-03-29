@@ -12,7 +12,7 @@ namespace HeThongMoiGioiDoCu.Mapper
             {
                 Username = userModel.Username,
                 Password = userModel.PasswordHash,
-                Email = userModel.Email
+                Gmail = userModel.Gmail
             };
         }
     }

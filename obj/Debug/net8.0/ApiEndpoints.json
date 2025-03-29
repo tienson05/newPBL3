@@ -60,33 +60,28 @@
         "IsRequired": false
       },
       {
+        "Name": "Gmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "Password",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Fullname",
+        "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
       },
       {
         "Name": "Gender",
-        "Type": "System.Boolean",
-        "IsRequired": false
-      },
-      {
-        "Name": "DateOfBirth",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "Address",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "BirthOfDate",
+        "Type": "System.DateTime",
         "IsRequired": false
       },
       {
@@ -95,7 +90,12 @@
         "IsRequired": false
       },
       {
-        "Name": "ProfilePictureUrl",
+        "Name": "Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvatarUrl",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -169,7 +169,7 @@
         "IsRequired": false
       },
       {
-        "Name": "Email",
+        "Name": "Gmail",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -179,17 +179,17 @@
         "IsRequired": false
       },
       {
-        "Name": "Fullname",
+        "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
       },
       {
         "Name": "Gender",
-        "Type": "System.Boolean",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "DateOfBirth",
+        "Name": "BirthOfDate",
         "Type": "System.DateTime",
         "IsRequired": false
       },
@@ -204,18 +204,23 @@
         "IsRequired": false
       },
       {
-        "Name": "ProfilePictureUrl",
+        "Name": "AvatarUrl",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "IsActive",
-        "Type": "System.Boolean",
+        "Name": "Status",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
         "Name": "Role",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsVerified",
+        "Type": "System.Boolean",
         "IsRequired": false
       }
     ],
@@ -288,27 +293,32 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "UserID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
         "Name": "Username",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "Email",
+        "Name": "Gmail",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "Fullname",
+        "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
       },
       {
         "Name": "Gender",
-        "Type": "System.Boolean",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "DateOfBirth",
+        "Name": "BirthOfDate",
         "Type": "System.DateTime",
         "IsRequired": false
       },
@@ -323,18 +333,23 @@
         "IsRequired": false
       },
       {
-        "Name": "ProfilePictureUrl",
+        "Name": "AvatarUrl",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "IsActive",
-        "Type": "System.Boolean",
+        "Name": "Status",
+        "Type": "System.String",
         "IsRequired": false
       },
       {
         "Name": "Role",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "IsVerified",
+        "Type": "System.Boolean",
         "IsRequired": false
       },
       {

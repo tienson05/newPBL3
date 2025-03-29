@@ -71,23 +71,28 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
                 return NotFound("User not found");
             }
 
-            if (user.IsActive == false)
+            if (user.Status == "Banned" || user.Status == "Inactive")
             {
                 return BadRequest("User not actived");
             }
 
             return Ok(new UserViewDto
             {
-                Id = user.Id,
-                Email = user.Email,
+                UserID = user.UserID,
+                Gmail = user.Gmail,
                 Username = user.Username,
-                Fullname = user.Fullname,
+                Name = user.Name,
                 Gender = user.Gender,
-                DateOfBirth = user.DateOfBirth,
+                BirthOfDate = user.BirthOfDate,
                 PhoneNumber = user.PhoneNumber,
                 Address = user.Address,
-                ProfilePictureUrl = user.ProfilePictureUrl,
+                AvatarUrl = user.AvatarUrl,
                 Role = user.Role,
+                Balance = user.Balance,
+                TotalPosts = user.TotalPosts,
+                TotalPurchases = user.TotalPurchases,
+                IsVerified = user.IsVerified,
+                Rating = user.Rating,
                 UpdateAt = user.UpdateAt,
                 CreateAt = user.CreateAt,
             });
@@ -99,16 +104,17 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
             User user = new User()
             {
                 Username = createUserDto.Username,
-                Email = createUserDto.Email,
+                Gmail = createUserDto.Gmail,
                 PasswordHash = _accountService.HashPassword(createUserDto.Password),
-                Fullname = createUserDto.Fullname,
+                Name = createUserDto.Name,
                 Gender = createUserDto.Gender,
-                DateOfBirth = createUserDto.DateOfBirth,
+                BirthOfDate = createUserDto.BirthOfDate,
                 PhoneNumber = createUserDto.PhoneNumber,
                 Address = createUserDto.Address,
-                ProfilePictureUrl = createUserDto.ProfilePictureUrl,
-                IsActive = createUserDto.IsActive,
+                AvatarUrl = createUserDto.AvatarUrl,
+                Status = createUserDto.Status,
                 Role = createUserDto.Role,
+                IsVerified=createUserDto.IsVerified,
             };
             await _userRepository.AddUserAsync(user);
 
@@ -124,15 +130,17 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
             return Ok(new UpdateUserOfAdminDto
             {
                 Username = user.Username,
-                Email = user.Email,
-                Fullname = user.Fullname,
+                Gmail = user.Gmail,
+                Name = user.Name,
                 Gender = user.Gender,
-                DateOfBirth = user.DateOfBirth,
+                BirthOfDate = user.BirthOfDate,
                 PhoneNumber = user.PhoneNumber,
                 Address = user.Address,
-                ProfilePictureUrl = user.ProfilePictureUrl,
-                IsActive = user.IsActive,
+                AvatarUrl = user.AvatarUrl,
+                Status= user.Status,
                 Role = user.Role,
+                IsVerified=user.IsVerified,
+                UserID = user.UserID
             });
         }
 
@@ -141,17 +149,18 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
         {
             var user = new User
             {
-                Id = id,
+                UserID = id,
                 Username = updateUserOfAdminDto.Username,
-                Email = updateUserOfAdminDto.Email,
-                Fullname = updateUserOfAdminDto.Fullname,
+                Gmail = updateUserOfAdminDto.Gmail,
+                Name = updateUserOfAdminDto.Name,
                 Gender = updateUserOfAdminDto.Gender,
-                DateOfBirth = updateUserOfAdminDto.DateOfBirth,
+                BirthOfDate = updateUserOfAdminDto.BirthOfDate,
                 PhoneNumber = updateUserOfAdminDto.PhoneNumber,
                 Address = updateUserOfAdminDto.Address,
-                ProfilePictureUrl = updateUserOfAdminDto.ProfilePictureUrl,
-                IsActive = updateUserOfAdminDto.IsActive,
+                AvatarUrl = updateUserOfAdminDto.AvatarUrl,
+                Status = updateUserOfAdminDto.Status,
                 Role = updateUserOfAdminDto.Role,
+                IsVerified = updateUserOfAdminDto.IsVerified,
             };
 
             await _userRepository.UpdateUserOfAdmin(user);

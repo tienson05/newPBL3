@@ -19,29 +19,29 @@
                   "Username": {
                     "type": "string"
                   },
+                  "Gmail": {
+                    "type": "string"
+                  },
                   "Password": {
                     "type": "string"
                   },
-                  "Email": {
-                    "type": "string"
-                  },
-                  "Fullname": {
+                  "Name": {
                     "type": "string"
                   },
                   "Gender": {
-                    "type": "boolean"
+                    "type": "string"
                   },
-                  "DateOfBirth": {
+                  "BirthOfDate": {
                     "type": "string",
                     "format": "date-time"
-                  },
-                  "Address": {
-                    "type": "string"
                   },
                   "PhoneNumber": {
                     "type": "string"
                   },
-                  "ProfilePictureUrl": {
+                  "Address": {
+                    "type": "string"
+                  },
+                  "AvatarUrl": {
                     "type": "string"
                   }
                 }
@@ -50,28 +50,28 @@
                 "Username": {
                   "style": "form"
                 },
+                "Gmail": {
+                  "style": "form"
+                },
                 "Password": {
                   "style": "form"
                 },
-                "Email": {
-                  "style": "form"
-                },
-                "Fullname": {
+                "Name": {
                   "style": "form"
                 },
                 "Gender": {
                   "style": "form"
                 },
-                "DateOfBirth": {
-                  "style": "form"
-                },
-                "Address": {
+                "BirthOfDate": {
                   "style": "form"
                 },
                 "PhoneNumber": {
                   "style": "form"
                 },
-                "ProfilePictureUrl": {
+                "Address": {
+                  "style": "form"
+                },
+                "AvatarUrl": {
                   "style": "form"
                 }
               }
@@ -323,19 +323,19 @@
                   "Username": {
                     "type": "string"
                   },
-                  "Email": {
+                  "Gmail": {
                     "type": "string"
                   },
                   "Password": {
                     "type": "string"
                   },
-                  "Fullname": {
+                  "Name": {
                     "type": "string"
                   },
                   "Gender": {
-                    "type": "boolean"
+                    "type": "string"
                   },
-                  "DateOfBirth": {
+                  "BirthOfDate": {
                     "type": "string",
                     "format": "date-time"
                   },
@@ -345,14 +345,17 @@
                   "Address": {
                     "type": "string"
                   },
-                  "ProfilePictureUrl": {
+                  "AvatarUrl": {
                     "type": "string"
                   },
-                  "IsActive": {
-                    "type": "boolean"
+                  "Status": {
+                    "type": "string"
                   },
                   "Role": {
                     "type": "string"
+                  },
+                  "IsVerified": {
+                    "type": "boolean"
                   }
                 }
               },
@@ -360,19 +363,19 @@
                 "Username": {
                   "style": "form"
                 },
-                "Email": {
+                "Gmail": {
                   "style": "form"
                 },
                 "Password": {
                   "style": "form"
                 },
-                "Fullname": {
+                "Name": {
                   "style": "form"
                 },
                 "Gender": {
                   "style": "form"
                 },
-                "DateOfBirth": {
+                "BirthOfDate": {
                   "style": "form"
                 },
                 "PhoneNumber": {
@@ -381,13 +384,16 @@
                 "Address": {
                   "style": "form"
                 },
-                "ProfilePictureUrl": {
+                "AvatarUrl": {
                   "style": "form"
                 },
-                "IsActive": {
+                "Status": {
                   "style": "form"
                 },
                 "Role": {
+                  "style": "form"
+                },
+                "IsVerified": {
                   "style": "form"
                 }
               }
@@ -444,19 +450,23 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "UserID": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
                   "Username": {
                     "type": "string"
                   },
-                  "Email": {
+                  "Gmail": {
                     "type": "string"
                   },
-                  "Fullname": {
+                  "Name": {
                     "type": "string"
                   },
                   "Gender": {
-                    "type": "boolean"
+                    "type": "string"
                   },
-                  "DateOfBirth": {
+                  "BirthOfDate": {
                     "type": "string",
                     "format": "date-time"
                   },
@@ -466,31 +476,37 @@
                   "Address": {
                     "type": "string"
                   },
-                  "ProfilePictureUrl": {
+                  "AvatarUrl": {
                     "type": "string"
                   },
-                  "IsActive": {
-                    "type": "boolean"
+                  "Status": {
+                    "type": "string"
                   },
                   "Role": {
                     "type": "string"
+                  },
+                  "IsVerified": {
+                    "type": "boolean"
                   }
                 }
               },
               "encoding": {
+                "UserID": {
+                  "style": "form"
+                },
                 "Username": {
                   "style": "form"
                 },
-                "Email": {
+                "Gmail": {
                   "style": "form"
                 },
-                "Fullname": {
+                "Name": {
                   "style": "form"
                 },
                 "Gender": {
                   "style": "form"
                 },
-                "DateOfBirth": {
+                "BirthOfDate": {
                   "style": "form"
                 },
                 "PhoneNumber": {
@@ -499,13 +515,16 @@
                 "Address": {
                   "style": "form"
                 },
-                "ProfilePictureUrl": {
+                "AvatarUrl": {
                   "style": "form"
                 },
-                "IsActive": {
+                "Status": {
                   "style": "form"
                 },
                 "Role": {
+                  "style": "form"
+                },
+                "IsVerified": {
                   "style": "form"
                 }
               }
@@ -539,22 +558,27 @@
       "UpdateUserDto": {
         "type": "object",
         "properties": {
+          "userID": {
+            "type": "integer",
+            "format": "int32"
+          },
           "username": {
             "type": "string",
             "nullable": true
           },
-          "email": {
+          "gmail": {
             "type": "string",
             "nullable": true
           },
-          "fullname": {
+          "name": {
             "type": "string",
             "nullable": true
           },
           "gender": {
-            "type": "boolean"
+            "type": "string",
+            "nullable": true
           },
-          "dateOfBirth": {
+          "birthOfDate": {
             "type": "string",
             "format": "date-time"
           },
@@ -566,7 +590,7 @@
             "type": "string",
             "nullable": true
           },
-          "profilePictureUrl": {
+          "avatarUrl": {
             "type": "string",
             "nullable": true
           }

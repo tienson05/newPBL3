@@ -22,7 +22,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         [HttpPost("signup")]
         public async Task<IActionResult> Signup([FromForm] SignupDto signupDto)
         {
-            var existingEmail = await _userRepository.GetUserByEmailAsync(signupDto.Email);
+            var existingEmail = await _userRepository.GetUserByEmailAsync(signupDto.Gmail);
 
             if(existingEmail != null)
             {
@@ -34,14 +34,23 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             var user = new User
             {
                 Username = signupDto.Username,
-                Email = signupDto.Email,
+                Gmail = signupDto.Gmail,
                 PasswordHash = hashedPassword,
                 Gender = signupDto.Gender,
                 Address = signupDto.Address,
-                DateOfBirth = signupDto.DateOfBirth,
-                Fullname = signupDto.Fullname,
+                BirthOfDate = signupDto.BirthOfDate,
+                Name = signupDto.Name,
                 PhoneNumber = signupDto.PhoneNumber,
-                ProfilePictureUrl = signupDto.ProfilePictureUrl,
+                AvatarUrl = signupDto.AvatarUrl,
+                CreateAt = DateTime.Now,
+                UpdateAt = DateTime.Now,
+                IsVerified = true,
+                Role = "Buyer",
+                Balance = 0,
+                TotalPosts = 0,
+                TotalPurchases = 0,
+                Rating = 0,
+                Status = "Active",
             };
 
             await _userRepository.AddUserAsync(user);
@@ -81,7 +90,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         [HttpPost("logout")] 
         public async Task<IActionResult> Logout()
         {
-            //Xoa token hoac cookie
+            
             return Ok(new { message = "Logged out successfully!" });
         }
 
@@ -93,23 +102,22 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
                 return NotFound("User not found");
             }
 
-            if(user.IsActive == false)
+            if(user.Status == "Inactive")
             {
                 return BadRequest("User not actived");
             }
 
             return Ok(new UserViewDto
             {
-                Id = user.Id,
-                Email = user.Email,
+                UserID = user.UserID,
+                Gmail = user.Gmail,
                 Username = user.Username,
-                Fullname = user.Fullname,
+                Name = user.Name,
                 Gender = user.Gender,
-                DateOfBirth = user.DateOfBirth,
+                BirthOfDate = user.BirthOfDate,
                 PhoneNumber = user.PhoneNumber,
                 Address = user.Address,
-                ProfilePictureUrl = user.ProfilePictureUrl,
-                Role = user.Role,
+                AvatarUrl = user.AvatarUrl,
                 UpdateAt = user.UpdateAt,
                 CreateAt = user.CreateAt,
             });
@@ -124,13 +132,13 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             return Ok(new UpdateUserDto
             {
                 Username = user.Username,
-                Email = user.Email,
-                Fullname= user.Fullname,
+                Gmail = user.Gmail,
+                Name= user.Name,
                 Gender = user.Gender,
-                DateOfBirth = user.DateOfBirth,
+                BirthOfDate = user.BirthOfDate,
                 PhoneNumber = user.PhoneNumber,
                 Address = user.Address,
-                ProfilePictureUrl = user.ProfilePictureUrl,
+                AvatarUrl = user.AvatarUrl,
             });
         }
 
@@ -139,16 +147,15 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         {
             var user = new User
             {
-                Id = id,
+                UserID = id,
                 Username = updateUserDto.Username,
-                Email = updateUserDto.Email,
-                Fullname = updateUserDto.Fullname,
+                Gmail = updateUserDto.Gmail,
+                Name = updateUserDto.Name,
                 Gender = updateUserDto.Gender,
-                DateOfBirth = updateUserDto.DateOfBirth,
+                BirthOfDate = updateUserDto.BirthOfDate,
                 PhoneNumber = updateUserDto.PhoneNumber,
                 Address = updateUserDto.Address,
-                ProfilePictureUrl = updateUserDto.ProfilePictureUrl,
-                UpdateAt = DateTime.UtcNow,
+                AvatarUrl = updateUserDto.AvatarUrl,
             };
 
             await _userRepository.UpdateUserAsync(user);
