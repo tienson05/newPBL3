@@ -1,5 +1,4 @@
-﻿using Emby.Media.Model.Attributes;
-using HeThongMoiGioiDoCu.Dtos.Account;
+﻿using HeThongMoiGioiDoCu.Dtos.Account;
 using HeThongMoiGioiDoCu.DTOs.Account;
 using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Models;
@@ -41,7 +40,8 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
                 Address = signupDto.Address,
                 DateOfBirth = signupDto.DateOfBirth,
                 Fullname = signupDto.Fullname,
-                PhoneNumber = signupDto.PhoneNumber
+                PhoneNumber = signupDto.PhoneNumber,
+                ProfilePictureUrl = signupDto.ProfilePictureUrl,
             };
 
             await _userRepository.AddUserAsync(user);
@@ -84,5 +84,76 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             //Xoa token hoac cookie
             return Ok(new { message = "Logged out successfully!" });
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUser([FromRoute] int id)
+        {
+            var user = await _userRepository.GetUserByIdAsync(id);
+            if (user == null) {
+                return NotFound("User not found");
+            }
+
+            if(user.IsActive == false)
+            {
+                return BadRequest("User not actived");
+            }
+
+            return Ok(new UserViewDto
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Username = user.Username,
+                Fullname = user.Fullname,
+                Gender = user.Gender,
+                DateOfBirth = user.DateOfBirth,
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address,
+                ProfilePictureUrl = user.ProfilePictureUrl,
+                Role = user.Role,
+                UpdateAt = user.UpdateAt,
+                CreateAt = user.CreateAt,
+            });
+        }
+
+        [HttpGet("update/{id}")]
+        public async Task<IActionResult> GetUserInfor([FromRoute] int id)
+        {
+            var user = await _userRepository.GetUserByIdAsync(id);
+            if (user == null) return NotFound("User not exist");
+
+            return Ok(new UpdateUserDto
+            {
+                Username = user.Username,
+                Email = user.Email,
+                Fullname= user.Fullname,
+                Gender = user.Gender,
+                DateOfBirth = user.DateOfBirth,
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address,
+                ProfilePictureUrl = user.ProfilePictureUrl,
+            });
+        }
+
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto updateUserDto, [FromRoute] int id)
+        {
+            var user = new User
+            {
+                Id = id,
+                Username = updateUserDto.Username,
+                Email = updateUserDto.Email,
+                Fullname = updateUserDto.Fullname,
+                Gender = updateUserDto.Gender,
+                DateOfBirth = updateUserDto.DateOfBirth,
+                PhoneNumber = updateUserDto.PhoneNumber,
+                Address = updateUserDto.Address,
+                ProfilePictureUrl = updateUserDto.ProfilePictureUrl,
+                UpdateAt = DateTime.UtcNow,
+            };
+
+            await _userRepository.UpdateUserAsync(user);
+
+            return NoContent();
+        }  
     }
 }

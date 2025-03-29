@@ -30,31 +30,57 @@ namespace HeThongMoiGioiDoCu.Repository
 
         public DataTable GetRecords(string sql)
         {
-            SqlDataAdapter da = new SqlDataAdapter(sql, cnn);
-            DataTable dt = new DataTable();
-            cnn.Open();
-            da.Fill(dt);
-            cnn.Close();
-            return dt;
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter(sql, cnn);
+                DataTable dt = new DataTable();
+                cnn.Open();
+                da.Fill(dt);
+                cnn.Close();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                throw;
+            }
+
         }
 
         // Thực thi câu lệnh SQL mà không trả về kết quả (ví dụ: INSERT, UPDATE, DELETE).
         public void ExecuteDB(string sql)
         {
-            SqlCommand cmd = new SqlCommand(sql, cnn);
-            cnn.Open();
-            cmd.ExecuteNonQuery();
-            cnn.Close();
+            try
+            {
+                SqlCommand cmd = new SqlCommand(sql, cnn);
+                cnn.Open();
+                cmd.ExecuteNonQuery();
+                cnn.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                throw;
+            }
         }
 
-        //Thực thi câu lệnh SQL có tham số truyền vào, không trả về kết quả.
         public void ExecuteDB(string sql, params SqlParameter[] p)
         {
-            SqlCommand cmd = new SqlCommand(sql, cnn);
-            cmd.Parameters.AddRange(p);
-            cnn.Open();
-            cmd.ExecuteNonQuery();
-            cnn.Close();
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(sql, cnn))
+                {
+                    cmd.Parameters.AddRange(p);
+                    cnn.Open();
+                    cmd.ExecuteNonQuery();
+                    cnn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                throw;  
+            }
         }
 
     }
