@@ -10,5 +10,9 @@ namespace HeThongMoiGioiDoCu.Interfaces
         Task UpdateUserAsync(User user);
         Task DeleteUserAsync(int id);
         Task UpdateUserOfAdmin(User user);
+
+        Task UpdateLastLogin(int id);
+
+        Task<List<User>> SearchUser(User user);
     }
 }

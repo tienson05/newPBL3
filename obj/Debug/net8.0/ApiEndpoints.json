@@ -22,7 +22,44 @@
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "logoutUserDto",
+        "Type": "HeThongMoiGioiDoCu.Dtos.Account.LogoutUserDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.AccountController",
+    "Method": "SearchUser",
+    "RelativePath": "api/account/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Gmail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -249,7 +286,13 @@
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "logoutUserDto",
+        "Type": "HeThongMoiGioiDoCu.Dtos.Account.LogoutUserDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

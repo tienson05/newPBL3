@@ -79,33 +79,79 @@ namespace HeThongMoiGioiDoCu.Repository
             {
                 foreach (DataRow row in user.Rows)
                 {
-                    return new User
-                    {
-                        UserID = row["UserID"] != DBNull.Value ? Convert.ToInt32(row["UserID"]) : 0,
-                        Username = row["Username"] != DBNull.Value ? row["Username"].ToString() : string.Empty,
-                        PasswordHash = row["PasswordHash"] != DBNull.Value ? row["PasswordHash"].ToString() : string.Empty,
-                        Gmail = row["Gmail"] != DBNull.Value ? row["Gmail"].ToString() : string.Empty,
-                        Name = row["Name"] != DBNull.Value ? row["Name"].ToString() : string.Empty,
-                        Gender = row["Gender"] != DBNull.Value ? row["Gender"].ToString() : string.Empty,
-                        BirthOfDate = row["BirthOfDate"] != DBNull.Value ? Convert.ToDateTime(row["BirthOfDate"]) : null,
-                        PhoneNumber = row["PhoneNumber"] != DBNull.Value ? row["PhoneNumber"].ToString() : string.Empty,
-                        Address = row["Address"] != DBNull.Value ? row["Address"].ToString() : string.Empty,
-                        AvatarUrl = row["AvatarUrl"] != DBNull.Value ? row["AvatarUrl"].ToString() : string.Empty,
-                        Balance = row["Balance"] != DBNull.Value ? Convert.ToDouble(row["Balance"]) : 0.0,
-                        TotalPosts = row["TotalPosts"] != DBNull.Value ? Convert.ToInt32(row["TotalPosts"]) : 0,
-                        TotalPurchases = row["TotalPurchases"] != DBNull.Value ? Convert.ToInt32(row["TotalPurchases"]) : 0,
-                        Rating = row["Rating"] != DBNull.Value ? Convert.ToDouble(row["Rating"]) : 0.0,
-                        Status = row["Status"] != DBNull.Value ? row["Status"].ToString() : string.Empty,
-                        Role = row["Role"] != DBNull.Value ? row["Role"].ToString() : string.Empty,
-                        IsVerified = row["IsVerified"] != DBNull.Value ? Convert.ToBoolean(row["IsVerified"]) : true,
-                        LastLoginAt = row["LastLoginAt"] != DBNull.Value ? Convert.ToDateTime(row["LastLoginAt"]) : null,
-                        UpdateAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : null,
-                        CreateAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : null
-                    };
+                    return MapToUser(row);
                 }
             }
             
             return null;
+        }
+
+        public Task<List<User>> SearchUser(User user)
+        {
+            string sql = "SELECT * FROM Users WHERE 1=1 ";
+            List<User> list = new List<User>();
+            
+            if(!string.IsNullOrWhiteSpace(user.Username))
+            {
+                sql += "AND Username LIKE '%" + user.Username + "%' ";
+            }
+
+            if (!string.IsNullOrWhiteSpace(user.Name))
+            {
+                sql += "AND Name LIKE '%" + user.Name + "%' ";
+            }
+
+            if (!string.IsNullOrWhiteSpace(user.PhoneNumber))
+            {
+                sql += "AND PhoneNumber LIKE '%" + user.PhoneNumber + "%' ";
+            }
+
+            if (!string.IsNullOrWhiteSpace(user.Gmail))
+            {
+                sql += "AND Gmail LIKE '%" + user.Gmail + "%' ";
+            }
+
+            foreach (DataRow row in DBHelper.Instance.GetRecords(sql).Rows)
+            {
+                list.Add(MapToUser(row));
+            }      
+            return Task.FromResult(list);
+        }
+
+        private User MapToUser(DataRow row)
+        {
+            return new User
+            {
+                UserID = row["UserID"] != DBNull.Value ? Convert.ToInt32(row["UserID"]) : 0,
+                Username = row["Username"] != DBNull.Value ? row["Username"].ToString() : string.Empty,
+                PasswordHash = row["PasswordHash"] != DBNull.Value ? row["PasswordHash"].ToString() : string.Empty,
+                Gmail = row["Gmail"] != DBNull.Value ? row["Gmail"].ToString() : string.Empty,
+                Name = row["Name"] != DBNull.Value ? row["Name"].ToString() : string.Empty,
+                Gender = row["Gender"] != DBNull.Value ? row["Gender"].ToString() : string.Empty,
+                BirthOfDate = row["BirthOfDate"] != DBNull.Value ? Convert.ToDateTime(row["BirthOfDate"]) : null,
+                PhoneNumber = row["PhoneNumber"] != DBNull.Value ? row["PhoneNumber"].ToString() : string.Empty,
+                Address = row["Address"] != DBNull.Value ? row["Address"].ToString() : string.Empty,
+                AvatarUrl = row["AvatarUrl"] != DBNull.Value ? row["AvatarUrl"].ToString() : string.Empty,
+                Balance = row["Balance"] != DBNull.Value ? Convert.ToDouble(row["Balance"]) : 0.0,
+                TotalPosts = row["TotalPosts"] != DBNull.Value ? Convert.ToInt32(row["TotalPosts"]) : 0,
+                TotalPurchases = row["TotalPurchases"] != DBNull.Value ? Convert.ToInt32(row["TotalPurchases"]) : 0,
+                Rating = row["Rating"] != DBNull.Value ? Convert.ToDouble(row["Rating"]) : 0.0,
+                Status = row["Status"] != DBNull.Value ? row["Status"].ToString() : string.Empty,
+                Role = row["Role"] != DBNull.Value ? row["Role"].ToString() : string.Empty,
+                IsVerified = row["IsVerified"] != DBNull.Value ? Convert.ToBoolean(row["IsVerified"]) : true,
+                LastLoginAt = row["LastLoginAt"] != DBNull.Value ? Convert.ToDateTime(row["LastLoginAt"]) : null,
+                UpdateAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : null,
+                CreateAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : null
+            };
+        }
+        public async Task UpdateLastLogin(int id)
+        {
+            string sql = @"UPDATE Users SET LastLoginAt = GETDATE() WHERE UserID = @UserID";
+            var parameters = new SqlParameter[]
+            {
+                new SqlParameter("@UserID", id)
+            };
+            DBHelper.Instance.ExecuteDB(sql, parameters);
         }
 
         public async Task UpdateUserAsync(User user)

@@ -1,5 +1,6 @@
 ﻿using HeThongMoiGioiDoCu.Dtos.Account;
 using HeThongMoiGioiDoCu.Interfaces;
+using HeThongMoiGioiDoCu.Mapper;
 using HeThongMoiGioiDoCu.Models;
 using HeThongMoiGioiDoCu.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -40,34 +41,16 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
 
             if (_accountService.VerifyPassword(user.PasswordHash, signinDto.Password))
             {
-                return Ok(new UserViewDto
-                {
-                    UserID = user.UserID,
-                    Name = user.Name,
-                    Gmail = user.Gmail,
-                    PhoneNumber = user.PhoneNumber,
-                    Address = user.Address,
-                    AvatarUrl = user.AvatarUrl,
-                    Username = user.Username,
-                    Gender = user.Gender,
-                    BirthOfDate = user.BirthOfDate,
-                    Balance = user.Balance,
-                    TotalPosts = user.TotalPosts,
-                    TotalPurchases = user.TotalPurchases,
-                    Rating = user.Rating,
-                    Role = user.Role,
-                    UpdateAt = user.UpdateAt,
-                    CreateAt = user.CreateAt,
-                });
+                return Ok(user.MapToUserViewDto());
             }
 
             return Unauthorized("Invalid password");
         }
 
         [HttpPost("logout")]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout([FromBody] LogoutUserDto logoutUserDto)
         {
-            // Xử lý logout: Xóa token hoặc cookie nếu cần
+            await _userRepository.UpdateLastLogin(logoutUserDto.UserID);
             return Ok(new { message = "Logged out successfully" }); 
         }
 
@@ -91,47 +74,14 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
                 return BadRequest("User not actived");
             }
 
-            return Ok(new UserViewDto
-            {
-                UserID = user.UserID,
-                Gmail = user.Gmail,
-                Username = user.Username,
-                Name = user.Name,
-                Gender = user.Gender,
-                BirthOfDate = user.BirthOfDate,
-                PhoneNumber = user.PhoneNumber,
-                Address = user.Address,
-                AvatarUrl = user.AvatarUrl,
-                Role = user.Role,
-                Balance = user.Balance,
-                TotalPosts = user.TotalPosts,
-                TotalPurchases = user.TotalPurchases,
-                IsVerified = user.IsVerified,
-                Rating = user.Rating,
-                UpdateAt = user.UpdateAt,
-                CreateAt = user.CreateAt,
-            });
+            return Ok(user.MapToUserViewDto());
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> CreateUser([FromForm]  CreateUserDto createUserDto)
         {
-            User user = new User()
-            {
-                Username = createUserDto.Username,
-                Gmail = createUserDto.Gmail,
-                PasswordHash = _accountService.HashPassword(createUserDto.Password),
-                Name = createUserDto.Name,
-                Gender = createUserDto.Gender,
-                BirthOfDate = createUserDto.BirthOfDate,
-                PhoneNumber = createUserDto.PhoneNumber,
-                Address = createUserDto.Address,
-                AvatarUrl = createUserDto.AvatarUrl,
-                Status = createUserDto.Status,
-                Role = createUserDto.Role,
-                IsVerified=createUserDto.IsVerified,
-            };
-            await _userRepository.AddUserAsync(user);
+            var hashedPassword = _accountService.HashPassword(createUserDto.Password);
+            await _userRepository.AddUserAsync(createUserDto.MapToUser(hashedPassword));
 
             return Ok(new { message = "Creating user successfully" });
         }
@@ -142,43 +92,13 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
             var user = await _userRepository.GetUserByIdAsync(id);
             if(user == null) return NotFound("User not found");
 
-            return Ok(new UpdateUserOfAdminDto
-            {
-                Username = user.Username,
-                Gmail = user.Gmail,
-                Name = user.Name,
-                Gender = user.Gender,
-                BirthOfDate = user.BirthOfDate,
-                PhoneNumber = user.PhoneNumber,
-                Address = user.Address,
-                AvatarUrl = user.AvatarUrl,
-                Status= user.Status,
-                Role = user.Role,
-                IsVerified=user.IsVerified,
-                UserID = user.UserID
-            });
+            return Ok(user.MapToUpdateUserOfAdminDto());
         }
 
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateUser([FromForm] UpdateUserOfAdminDto updateUserOfAdminDto, [FromRoute] int id)
         {
-            var user = new User
-            {
-                UserID = id,
-                Username = updateUserOfAdminDto.Username,
-                Gmail = updateUserOfAdminDto.Gmail,
-                Name = updateUserOfAdminDto.Name,
-                Gender = updateUserOfAdminDto.Gender,
-                BirthOfDate = updateUserOfAdminDto.BirthOfDate,
-                PhoneNumber = updateUserOfAdminDto.PhoneNumber,
-                Address = updateUserOfAdminDto.Address,
-                AvatarUrl = updateUserOfAdminDto.AvatarUrl,
-                Status = updateUserOfAdminDto.Status,
-                Role = updateUserOfAdminDto.Role,
-                IsVerified = updateUserOfAdminDto.IsVerified,
-            };
-
-            await _userRepository.UpdateUserOfAdmin(user);
+            await _userRepository.UpdateUserOfAdmin(updateUserOfAdminDto.MapToUser(id));
             return NoContent();
         }
 

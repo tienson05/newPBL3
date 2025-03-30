@@ -1,6 +1,7 @@
 ﻿using HeThongMoiGioiDoCu.Dtos.Account;
 using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Mapper;
+using HeThongMoiGioiDoCu.Models;
 using HeThongMoiGioiDoCu.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,7 +35,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
 
             await _userRepository.AddUserAsync(user);
 
-            return CreatedAtAction(nameof(Signin), new { controller = "Account" }, new { message = "Registration successful. You can now log in.", loginUrl = "/api/account/signin" });
+            return Ok("Signup successfully!");
         }
 
         [HttpPost("signin")]
@@ -66,9 +67,9 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         }
 
         [HttpPost("logout")] 
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout([FromBody] LogoutUserDto logoutUserDto)
         {
-            
+            await _userRepository.UpdateLastLogin(logoutUserDto.UserID);
             return Ok(new { message = "Logged out successfully!" });
         }
 
@@ -100,12 +101,23 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto updateUserDto, [FromRoute] int id)
         {
-            //var user = UserMappers.MapToUser(updateUserDto, id);
-
             var user = updateUserDto.MapToUser(id);
             await _userRepository.UpdateUserAsync(user);
 
-            return NoContent();
-        }  
+            return Ok("Updated successfully!");
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchUser([FromQuery] SearchUserDto searchUserDto) {
+            if (searchUserDto == null)
+            {
+                return BadRequest("Invalid search parameters.");
+            }
+            
+            List<User> users = await _userRepository.SearchUser(searchUserDto.MapToUser());
+            if(users.Count == 0) return NotFound("Users not found!");
+            return Ok(users.ToList());
+            
+        }
     }
 }
