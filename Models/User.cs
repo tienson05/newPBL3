@@ -1,4 +1,5 @@
-﻿using MediaBrowser.Model.ProcessRun.Metrics;
+﻿using System.Text.Json.Serialization;
+using MediaBrowser.Model.ProcessRun.Metrics;
 
 namespace HeThongMoiGioiDoCu.Models
 {
@@ -14,7 +15,7 @@ namespace HeThongMoiGioiDoCu.Models
         public string PhoneNumber { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string AvatarUrl { get; set; } = string.Empty;
-        public double Balance { get; set; }
+        public decimal Balance { get; set; }
         public int TotalPosts { get; set; }
         public int TotalPurchases { get; set; }
         public double Rating { get; set; }
@@ -22,8 +23,10 @@ namespace HeThongMoiGioiDoCu.Models
         public string Role { get; set; } = string.Empty;
         public bool IsVerified { get; set; }
         public DateTime? LastLoginAt { get; set; }
-        public DateTime?  UpdateAt { get; set; }
-        public DateTime? CreateAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
+        [JsonIgnore]
+        public ICollection<Product> Products { get; set; }
     }
 }

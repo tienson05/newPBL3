@@ -12,6 +12,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
     {
         private readonly IUserRepository _userRepository;
         private readonly AccountService _accountService;
+
         public AccountController(IUserRepository userRepository, AccountService accountService)
         {
             _userRepository = userRepository;
@@ -23,7 +24,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         {
             var existingEmail = await _userRepository.GetUserByEmailAsync(signupDto.Gmail);
 
-            if(existingEmail != null)
+            if (existingEmail != null)
             {
                 return Conflict("User with this email already exists.");
             }
@@ -34,25 +35,33 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
 
             await _userRepository.AddUserAsync(user);
 
-            return CreatedAtAction(nameof(Signin), new { controller = "Account" }, new { message = "Registration successful. You can now log in.", loginUrl = "/api/account/signin" });
+            return CreatedAtAction(
+                nameof(Signin),
+                new { controller = "Account" },
+                new
+                {
+                    message = "Registration successful. You can now log in.",
+                    loginUrl = "/api/account/signin",
+                }
+            );
         }
 
         [HttpPost("signin")]
         public async Task<IActionResult> Signin([FromForm] SigninDto signinDto)
         {
-            if(string.IsNullOrWhiteSpace(signinDto.Email))
+            if (string.IsNullOrWhiteSpace(signinDto.Email))
             {
                 return BadRequest("Email is required!");
             }
 
-            if(string.IsNullOrWhiteSpace(signinDto.Password))
+            if (string.IsNullOrWhiteSpace(signinDto.Password))
             {
                 return BadRequest("Password is required!");
             }
 
             var user = await _userRepository.GetUserByEmailAsync(signinDto.Email);
 
-            if(user == null || user.Role == "Admin")
+            if (user == null || user.Role == "Admin")
             {
                 return NotFound("User not found!");
             }
@@ -65,10 +74,9 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             return Unauthorized("Invalid password!");
         }
 
-        [HttpPost("logout")] 
+        [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
-            
             return Ok(new { message = "Logged out successfully!" });
         }
 
@@ -76,11 +84,12 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null) {
+            if (user == null)
+            {
                 return NotFound("User not found");
             }
 
-            if(user.Status == "Inactive")
+            if (user.Status == "Inactive")
             {
                 return BadRequest("User not actived");
             }
@@ -92,13 +101,17 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         public async Task<IActionResult> GetUserInfor([FromRoute] int id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null) return NotFound("User not exist");
+            if (user == null)
+                return NotFound("User not exist");
 
             return Ok(user.MapToUpdateUserDto());
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto updateUserDto, [FromRoute] int id)
+        public async Task<IActionResult> UpdateUser(
+            [FromBody] UpdateUserDto updateUserDto,
+            [FromRoute] int id
+        )
         {
             //var user = UserMappers.MapToUser(updateUserDto, id);
 
@@ -106,6 +119,6 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             await _userRepository.UpdateUserAsync(user);
 
             return NoContent();
-        }  
+        }
     }
 }

@@ -1,13 +1,17 @@
 ﻿using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Repository;
 using HeThongMoiGioiDoCu.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 //// Đăng ký dịch vụ UserRepository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 
 // Đăng ký AccountService vào DI container
 builder.Services.AddScoped<AccountService>();

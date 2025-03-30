@@ -55,7 +55,7 @@ namespace HeThongMoiGioiDoCu.Repository
                         PhoneNumber = row["PhoneNumber"] != DBNull.Value ? row["PhoneNumber"].ToString() : string.Empty,
                         Address = row["Address"] != DBNull.Value ? row["Address"].ToString() : string.Empty,
                         AvatarUrl = row["AvatarUrl"] != DBNull.Value ? row["AvatarUrl"].ToString() : string.Empty,
-                        Balance = row["Balance"] != DBNull.Value ? Convert.ToDouble(row["Balance"]) : 0.0,
+                        Balance = row["Balance"] != DBNull.Value ? Convert.ToDecimal(row["Balance"]) : Convert.ToDecimal(0.0),
                         TotalPosts = row["TotalPosts"] != DBNull.Value ? Convert.ToInt32(row["TotalPosts"]) : 0,
                         TotalPurchases = row["TotalPurchases"] != DBNull.Value ? Convert.ToInt32(row["TotalPurchases"]) : 0,
                         Rating = row["Rating"] != DBNull.Value ? Convert.ToDouble(row["Rating"]) : 0.0,
@@ -63,8 +63,8 @@ namespace HeThongMoiGioiDoCu.Repository
                         Role = row["Role"] != DBNull.Value ? row["Role"].ToString() : string.Empty,
                         IsVerified = row["IsVerified"] != DBNull.Value ? Convert.ToBoolean(row["IsVerified"]) : true,
                         LastLoginAt = row["LastLoginAt"] != DBNull.Value ? Convert.ToDateTime(row["LastLoginAt"]) : null,
-                        UpdateAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : null,
-                        CreateAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : null
+                        UpdatedAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : null,
+                        CreatedAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : null
                     };
                 }
             }
@@ -91,7 +91,7 @@ namespace HeThongMoiGioiDoCu.Repository
                         PhoneNumber = row["PhoneNumber"] != DBNull.Value ? row["PhoneNumber"].ToString() : string.Empty,
                         Address = row["Address"] != DBNull.Value ? row["Address"].ToString() : string.Empty,
                         AvatarUrl = row["AvatarUrl"] != DBNull.Value ? row["AvatarUrl"].ToString() : string.Empty,
-                        Balance = row["Balance"] != DBNull.Value ? Convert.ToDouble(row["Balance"]) : 0.0,
+                        Balance = row["Balance"] != DBNull.Value ? Convert.ToDecimal(row["Balance"]) : Convert.ToDecimal(0.0),
                         TotalPosts = row["TotalPosts"] != DBNull.Value ? Convert.ToInt32(row["TotalPosts"]) : 0,
                         TotalPurchases = row["TotalPurchases"] != DBNull.Value ? Convert.ToInt32(row["TotalPurchases"]) : 0,
                         Rating = row["Rating"] != DBNull.Value ? Convert.ToDouble(row["Rating"]) : 0.0,
@@ -99,8 +99,8 @@ namespace HeThongMoiGioiDoCu.Repository
                         Role = row["Role"] != DBNull.Value ? row["Role"].ToString() : string.Empty,
                         IsVerified = row["IsVerified"] != DBNull.Value ? Convert.ToBoolean(row["IsVerified"]) : true,
                         LastLoginAt = row["LastLoginAt"] != DBNull.Value ? Convert.ToDateTime(row["LastLoginAt"]) : null,
-                        UpdateAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : null,
-                        CreateAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : null
+                        UpdatedAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : null,
+                        CreatedAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : null
                     };
                 }
             }

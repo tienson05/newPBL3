@@ -40,25 +40,27 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
 
             if (_accountService.VerifyPassword(user.PasswordHash, signinDto.Password))
             {
-                return Ok(new UserViewDto
-                {
-                    UserID = user.UserID,
-                    Name = user.Name,
-                    Gmail = user.Gmail,
-                    PhoneNumber = user.PhoneNumber,
-                    Address = user.Address,
-                    AvatarUrl = user.AvatarUrl,
-                    Username = user.Username,
-                    Gender = user.Gender,
-                    BirthOfDate = user.BirthOfDate,
-                    Balance = user.Balance,
-                    TotalPosts = user.TotalPosts,
-                    TotalPurchases = user.TotalPurchases,
-                    Rating = user.Rating,
-                    Role = user.Role,
-                    UpdateAt = user.UpdateAt,
-                    CreateAt = user.CreateAt,
-                });
+                return Ok(
+                    new UserViewDto
+                    {
+                        UserID = user.UserID,
+                        Name = user.Name,
+                        Gmail = user.Gmail,
+                        PhoneNumber = user.PhoneNumber,
+                        Address = user.Address,
+                        AvatarUrl = user.AvatarUrl,
+                        Username = user.Username,
+                        Gender = user.Gender,
+                        BirthOfDate = user.BirthOfDate,
+                        Balance = user.Balance,
+                        TotalPosts = user.TotalPosts,
+                        TotalPurchases = user.TotalPurchases,
+                        Rating = user.Rating,
+                        Role = user.Role,
+                        UpdatedAt = user.UpdatedAt,
+                        CreatedAt = user.CreatedAt,
+                    }
+                );
             }
 
             return Unauthorized("Invalid password");
@@ -68,11 +70,12 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
         public IActionResult Logout()
         {
             // Xử lý logout: Xóa token hoặc cookie nếu cần
-            return Ok(new { message = "Logged out successfully" }); 
+            return Ok(new { message = "Logged out successfully" });
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<ActionResult> Delete([FromRoute] int id) { 
+        public async Task<ActionResult> Delete([FromRoute] int id)
+        {
             await _userRepository.DeleteUserAsync(id);
             return Ok();
         }
@@ -91,30 +94,32 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
                 return BadRequest("User not actived");
             }
 
-            return Ok(new UserViewDto
-            {
-                UserID = user.UserID,
-                Gmail = user.Gmail,
-                Username = user.Username,
-                Name = user.Name,
-                Gender = user.Gender,
-                BirthOfDate = user.BirthOfDate,
-                PhoneNumber = user.PhoneNumber,
-                Address = user.Address,
-                AvatarUrl = user.AvatarUrl,
-                Role = user.Role,
-                Balance = user.Balance,
-                TotalPosts = user.TotalPosts,
-                TotalPurchases = user.TotalPurchases,
-                IsVerified = user.IsVerified,
-                Rating = user.Rating,
-                UpdateAt = user.UpdateAt,
-                CreateAt = user.CreateAt,
-            });
+            return Ok(
+                new UserViewDto
+                {
+                    UserID = user.UserID,
+                    Gmail = user.Gmail,
+                    Username = user.Username,
+                    Name = user.Name,
+                    Gender = user.Gender,
+                    BirthOfDate = user.BirthOfDate,
+                    PhoneNumber = user.PhoneNumber,
+                    Address = user.Address,
+                    AvatarUrl = user.AvatarUrl,
+                    Role = user.Role,
+                    Balance = user.Balance,
+                    TotalPosts = user.TotalPosts,
+                    TotalPurchases = user.TotalPurchases,
+                    IsVerified = user.IsVerified,
+                    Rating = user.Rating,
+                    UpdatedAt = user.UpdatedAt,
+                    CreatedAt = user.CreatedAt,
+                }
+            );
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateUser([FromForm]  CreateUserDto createUserDto)
+        public async Task<IActionResult> CreateUser([FromForm] CreateUserDto createUserDto)
         {
             User user = new User()
             {
@@ -129,7 +134,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
                 AvatarUrl = createUserDto.AvatarUrl,
                 Status = createUserDto.Status,
                 Role = createUserDto.Role,
-                IsVerified=createUserDto.IsVerified,
+                IsVerified = createUserDto.IsVerified,
             };
             await _userRepository.AddUserAsync(user);
 
@@ -140,27 +145,33 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
         public async Task<IActionResult> GetUserToUpdate([FromRoute] int id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
-            if(user == null) return NotFound("User not found");
+            if (user == null)
+                return NotFound("User not found");
 
-            return Ok(new UpdateUserOfAdminDto
-            {
-                Username = user.Username,
-                Gmail = user.Gmail,
-                Name = user.Name,
-                Gender = user.Gender,
-                BirthOfDate = user.BirthOfDate,
-                PhoneNumber = user.PhoneNumber,
-                Address = user.Address,
-                AvatarUrl = user.AvatarUrl,
-                Status= user.Status,
-                Role = user.Role,
-                IsVerified=user.IsVerified,
-                UserID = user.UserID
-            });
+            return Ok(
+                new UpdateUserOfAdminDto
+                {
+                    Username = user.Username,
+                    Gmail = user.Gmail,
+                    Name = user.Name,
+                    Gender = user.Gender,
+                    BirthOfDate = user.BirthOfDate,
+                    PhoneNumber = user.PhoneNumber,
+                    Address = user.Address,
+                    AvatarUrl = user.AvatarUrl,
+                    Status = user.Status,
+                    Role = user.Role,
+                    IsVerified = user.IsVerified,
+                    UserID = user.UserID,
+                }
+            );
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateUser([FromForm] UpdateUserOfAdminDto updateUserOfAdminDto, [FromRoute] int id)
+        public async Task<IActionResult> UpdateUser(
+            [FromForm] UpdateUserOfAdminDto updateUserOfAdminDto,
+            [FromRoute] int id
+        )
         {
             var user = new User
             {
@@ -181,6 +192,5 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
             await _userRepository.UpdateUserOfAdmin(user);
             return NoContent();
         }
-
     }
 }

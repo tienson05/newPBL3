@@ -28,8 +28,8 @@ namespace HeThongMoiGioiDoCu.Mapper
                 Name = signupDto.Name,
                 PhoneNumber = signupDto.PhoneNumber,
                 AvatarUrl = signupDto.AvatarUrl,
-                CreateAt = DateTime.Now,
-                UpdateAt = DateTime.Now,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
                 IsVerified = true,
                 Role = "Buyer",
                 Balance = 0,
@@ -86,8 +86,8 @@ namespace HeThongMoiGioiDoCu.Mapper
                 TotalPurchases = user.TotalPurchases,
                 Rating = user.Rating,
                 Role = user.Role,
-                UpdateAt = user.UpdateAt,
-                CreateAt = user.CreateAt,
+                UpdatedAt = user.UpdatedAt,
+                CreatedAt = user.CreatedAt,
             };
         }
     }
