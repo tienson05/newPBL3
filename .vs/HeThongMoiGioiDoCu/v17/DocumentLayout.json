@@ -58,8 +58,7 @@
               "RelativeToolTip": "Interfaces\\IUserRepository.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T12:30:23.807Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T12:30:23.807Z"
             },
             {
               "$type": "Document",
@@ -71,8 +70,7 @@
               "RelativeToolTip": "Dtos\\Account\\SearchUserDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T12:22:17.73Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T12:22:17.73Z"
             },
             {
               "$type": "Document",
@@ -82,7 +80,7 @@
               "RelativeDocumentMoniker": "Controllers\\Clients\\AccountController.cs",
               "ToolTip": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\AccountController.cs",
               "RelativeToolTip": "Controllers\\Clients\\AccountController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAswHcAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-30T12:11:40.877Z",
               "EditorCaption": ""
@@ -97,8 +95,7 @@
               "RelativeToolTip": "Models\\User.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T11:58:14.785Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T11:58:14.785Z"
             },
             {
               "$type": "Document",
@@ -110,8 +107,7 @@
               "RelativeToolTip": "Repository\\UserRepository.cs",
               "ViewState": "AgIAAFMAAAAAAAAAAAAgwHEAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T11:55:39.109Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T11:55:39.109Z"
             },
             {
               "$type": "Document",
@@ -123,8 +119,7 @@
               "RelativeToolTip": "Controllers\\Admin\\AccountController.cs",
               "ViewState": "AgIAACcAAAAAAAAAAAAYwDQAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T05:52:04.83Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T05:52:04.83Z"
             },
             {
               "$type": "Document",
@@ -136,8 +131,7 @@
               "RelativeToolTip": "Mappers\\UserMappers.cs",
               "ViewState": "AgIAAH8AAAAAAAAAAAAwwJgAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T11:42:33.167Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-30T11:42:33.167Z"
             }
           ]
         },
