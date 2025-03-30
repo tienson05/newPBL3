@@ -10,7 +10,7 @@ namespace HeThongMoiGioiDoCu.Models
         public string PasswordHash { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
-        public DateTime BirthOfDate { get; set; }
+        public DateTime? BirthOfDate { get; set; }
         public string PhoneNumber { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string AvatarUrl { get; set; } = string.Empty;
@@ -21,9 +21,9 @@ namespace HeThongMoiGioiDoCu.Models
         public string Status { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
         public bool IsVerified { get; set; }
-        public DateTime LastLoginAt { get; set; }
-        public DateTime  UpdateAt { get; set; }
-        public DateTime CreateAt { get; set; }
+        public DateTime? LastLoginAt { get; set; }
+        public DateTime?  UpdateAt { get; set; }
+        public DateTime? CreateAt { get; set; }
 
     }
 }

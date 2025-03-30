@@ -580,7 +580,8 @@
           },
           "birthOfDate": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "phoneNumber": {
             "type": "string",

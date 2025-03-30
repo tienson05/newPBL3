@@ -43,7 +43,25 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
 
             if (_accountService.VerifyPassword(user.PasswordHash, signinDto.Password))
             {
-                return Ok(new { message = "Login successful." });
+                return Ok(new UserViewDto
+                {
+                    UserID = user.UserID,
+                    Name = user.Name,
+                    Gmail = user.Gmail,
+                    PhoneNumber = user.PhoneNumber,
+                    Address = user.Address,
+                    AvatarUrl = user.AvatarUrl,
+                    Username = user.Username,
+                    Gender = user.Gender,
+                    BirthOfDate = user.BirthOfDate,
+                    Balance = user.Balance,
+                    TotalPosts = user.TotalPosts,
+                    TotalPurchases = user.TotalPurchases,
+                    Rating = user.Rating,
+                    Role = user.Role,
+                    UpdateAt = user.UpdateAt,
+                    CreateAt = user.CreateAt,
+                });
             }
 
             return Unauthorized("Invalid password");

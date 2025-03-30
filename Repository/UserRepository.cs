@@ -19,7 +19,7 @@ namespace HeThongMoiGioiDoCu.Repository
             sql += user.TotalPosts + "', '";
             sql += user.Rating + "', '";
             sql += user.Status + "', '";
-            sql += user.BirthOfDate.ToString("yyyy-MM-dd HH:mm:ss") + "', '";
+            sql += user.BirthOfDate?.ToString("yyyy-MM-dd HH:mm:ss") ?? "NULL" + "', '";
             sql += user.PhoneNumber + "', '";
             sql += user.Address + "', '";
             sql += user.AvatarUrl + "', '";
@@ -39,16 +39,32 @@ namespace HeThongMoiGioiDoCu.Repository
         {
             string sql = "SELECT * FROM Users WHERE Gmail = '" + email + "'";
             var user = DBHelper.Instance.GetRecords(sql);
-            if(user != null && user.Rows.Count > 0)
+            if (user != null && user.Rows.Count > 0)
             {
                 foreach (DataRow row in user.Rows)
                 {
                     return new User
                     {
-                        Username = row["Username"].ToString(),
-                        PasswordHash = row["PasswordHash"].ToString(),
-                        Gmail = row["Gmail"].ToString(),
-                        Name = row["Name"].ToString(),
+                        UserID = row["UserID"] != DBNull.Value ? Convert.ToInt32(row["UserID"]) : 0,
+                        Username = row["Username"] != DBNull.Value ? row["Username"].ToString() : string.Empty,
+                        PasswordHash = row["PasswordHash"] != DBNull.Value ? row["PasswordHash"].ToString() : string.Empty,
+                        Gmail = row["Gmail"] != DBNull.Value ? row["Gmail"].ToString() : string.Empty,
+                        Name = row["Name"] != DBNull.Value ? row["Name"].ToString() : string.Empty,
+                        Gender = row["Gender"] != DBNull.Value ? row["Gender"].ToString() : string.Empty,
+                        BirthOfDate = row["BirthOfDate"] != DBNull.Value ? Convert.ToDateTime(row["BirthOfDate"]) : null,
+                        PhoneNumber = row["PhoneNumber"] != DBNull.Value ? row["PhoneNumber"].ToString() : string.Empty,
+                        Address = row["Address"] != DBNull.Value ? row["Address"].ToString() : string.Empty,
+                        AvatarUrl = row["AvatarUrl"] != DBNull.Value ? row["AvatarUrl"].ToString() : string.Empty,
+                        Balance = row["Balance"] != DBNull.Value ? Convert.ToDouble(row["Balance"]) : 0.0,
+                        TotalPosts = row["TotalPosts"] != DBNull.Value ? Convert.ToInt32(row["TotalPosts"]) : 0,
+                        TotalPurchases = row["TotalPurchases"] != DBNull.Value ? Convert.ToInt32(row["TotalPurchases"]) : 0,
+                        Rating = row["Rating"] != DBNull.Value ? Convert.ToDouble(row["Rating"]) : 0.0,
+                        Status = row["Status"] != DBNull.Value ? row["Status"].ToString() : string.Empty,
+                        Role = row["Role"] != DBNull.Value ? row["Role"].ToString() : string.Empty,
+                        IsVerified = row["IsVerified"] != DBNull.Value ? Convert.ToBoolean(row["IsVerified"]) : true,
+                        LastLoginAt = row["LastLoginAt"] != DBNull.Value ? Convert.ToDateTime(row["LastLoginAt"]) : null,
+                        UpdateAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : null,
+                        CreateAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : null
                     };
                 }
             }
@@ -65,26 +81,26 @@ namespace HeThongMoiGioiDoCu.Repository
                 {
                     return new User
                     {
-                        UserID = Convert.ToInt32(row["UserID"]),
-                        Username = row["Username"].ToString(),
-                        Gmail = row["Gmail"].ToString(),
-                        PasswordHash = row["PasswordHash"].ToString(),
-                        Name = row["Name"].ToString(), 
-                        Gender = row["Gender"].ToString(),
-                        BirthOfDate = Convert.ToDateTime(row["BirthOfDate"]),
-                        PhoneNumber = row["PhoneNumber"].ToString(),
-                        Address = row["Address"].ToString(),
-                        AvatarUrl = row["AvatarUrl"].ToString(),
-                        Status = row["Status"].ToString(),
-                        Role = row["Role"].ToString(),
-                        Balance = Convert.ToDouble(row["Balance"]),
-                        TotalPosts = Convert.ToInt32(row["TotalPosts"]),
-                        TotalPurchases = Convert.ToInt32(row["TotalPurchases"]),
-                        Rating = Convert.ToDouble(row["Rating"]),
-                        IsVerified = Convert.ToBoolean(row["IsVerified"]),
-                        //LastLoginAt = Convert.ToDateTime(row["LastLoginAt"]),
-                        UpdateAt = Convert.ToDateTime(row["UpdatedAt"]),
-                        CreateAt = Convert.ToDateTime(row["CreatedAt"]),
+                        UserID = row["UserID"] != DBNull.Value ? Convert.ToInt32(row["UserID"]) : 0,
+                        Username = row["Username"] != DBNull.Value ? row["Username"].ToString() : string.Empty,
+                        PasswordHash = row["PasswordHash"] != DBNull.Value ? row["PasswordHash"].ToString() : string.Empty,
+                        Gmail = row["Gmail"] != DBNull.Value ? row["Gmail"].ToString() : string.Empty,
+                        Name = row["Name"] != DBNull.Value ? row["Name"].ToString() : string.Empty,
+                        Gender = row["Gender"] != DBNull.Value ? row["Gender"].ToString() : string.Empty,
+                        BirthOfDate = row["BirthOfDate"] != DBNull.Value ? Convert.ToDateTime(row["BirthOfDate"]) : null,
+                        PhoneNumber = row["PhoneNumber"] != DBNull.Value ? row["PhoneNumber"].ToString() : string.Empty,
+                        Address = row["Address"] != DBNull.Value ? row["Address"].ToString() : string.Empty,
+                        AvatarUrl = row["AvatarUrl"] != DBNull.Value ? row["AvatarUrl"].ToString() : string.Empty,
+                        Balance = row["Balance"] != DBNull.Value ? Convert.ToDouble(row["Balance"]) : 0.0,
+                        TotalPosts = row["TotalPosts"] != DBNull.Value ? Convert.ToInt32(row["TotalPosts"]) : 0,
+                        TotalPurchases = row["TotalPurchases"] != DBNull.Value ? Convert.ToInt32(row["TotalPurchases"]) : 0,
+                        Rating = row["Rating"] != DBNull.Value ? Convert.ToDouble(row["Rating"]) : 0.0,
+                        Status = row["Status"] != DBNull.Value ? row["Status"].ToString() : string.Empty,
+                        Role = row["Role"] != DBNull.Value ? row["Role"].ToString() : string.Empty,
+                        IsVerified = row["IsVerified"] != DBNull.Value ? Convert.ToBoolean(row["IsVerified"]) : true,
+                        LastLoginAt = row["LastLoginAt"] != DBNull.Value ? Convert.ToDateTime(row["LastLoginAt"]) : null,
+                        UpdateAt = row["UpdatedAt"] != DBNull.Value ? Convert.ToDateTime(row["UpdatedAt"]) : null,
+                        CreateAt = row["CreatedAt"] != DBNull.Value ? Convert.ToDateTime(row["CreatedAt"]) : null
                     };
                 }
             }

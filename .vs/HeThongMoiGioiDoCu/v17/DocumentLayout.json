@@ -7,12 +7,20 @@
       "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:controllers\\admin\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\controllers\\clients\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:controllers\\clients\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\userviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\userviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\updateuserofadmindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\updateuserofadmindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,12 +39,12 @@
       "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\createuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\repository\\dbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:repository\\dbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:repository\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,20 +59,8 @@
       "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:interfaces\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\controllers\\clients\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:controllers\\clients\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\updateuserofadmindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\updateuserofadmindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\mappers\\usermappers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,7 +74,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -90,59 +86,72 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Controllers\\Admin\\AccountController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Admin\\AccountController.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Controllers\\Admin\\AccountController.cs",
-              "RelativeToolTip": "Controllers\\Admin\\AccountController.cs",
-              "ViewState": "AgIAAIUAAAAAAAAAAAAwwJgAAAA5AAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "UserViewDto.cs",
+              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UserViewDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Account\\UserViewDto.cs",
+              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UserViewDto.cs",
+              "RelativeToolTip": "Dtos\\Account\\UserViewDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T06:07:09.654Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DBHelper.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Repository\\DBHelper.cs",
-              "RelativeDocumentMoniker": "Repository\\DBHelper.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Repository\\DBHelper.cs",
-              "RelativeToolTip": "Repository\\DBHelper.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAgwDsAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T09:35:01.713Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProductRepository.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Repository\\ProductRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\ProductRepository.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Repository\\ProductRepository.cs",
-              "RelativeToolTip": "Repository\\ProductRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T10:29:08.632Z",
+              "WhenOpened": "2025-03-30T04:51:50.847Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "CreateUserDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\CreateUserDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\CreateUserDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\CreateUserDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\CreateUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA8AAAAsAAAAAAAAAA==",
+              "Title": "SignupDto.cs",
+              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SignupDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Account\\SignupDto.cs",
+              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SignupDto.cs",
+              "RelativeToolTip": "Dtos\\Account\\SignupDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T09:10:02.102Z",
+              "WhenOpened": "2025-03-29T09:28:02.642Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "UpdateUserDto.cs",
+              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Account\\UpdateUserDto.cs",
+              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserDto.cs",
+              "RelativeToolTip": "Dtos\\Account\\UpdateUserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T09:25:16.216Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Clients\\AccountController.cs",
+              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\Clients\\AccountController.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAgwGQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T09:24:46.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UpdateUserOfAdminDto.cs",
+              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserOfAdminDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Account\\UpdateUserOfAdminDto.cs",
+              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserOfAdminDto.cs",
+              "RelativeToolTip": "Dtos\\Account\\UpdateUserOfAdminDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T09:39:40.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "SigninDto.cs",
               "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SigninDto.cs",
               "RelativeDocumentMoniker": "Dtos\\Account\\SigninDto.cs",
@@ -155,59 +164,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SignupDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SignupDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\SignupDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SignupDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\SignupDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAIAAAARAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Controllers\\Admin\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Admin\\AccountController.cs",
+              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Controllers\\Admin\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\Admin\\AccountController.cs",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAowIIAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T09:28:02.642Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UpdateUserDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\UpdateUserDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\UpdateUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T09:25:16.216Z",
+              "WhenOpened": "2025-03-28T06:07:09.654Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UserViewDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UserViewDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\UserViewDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UserViewDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\UserViewDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA8AAAAAAAAAA==",
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Repository\\UserRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\UserRepository.cs",
+              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Repository\\UserRepository.cs",
+              "RelativeToolTip": "Repository\\UserRepository.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAgwGsAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T09:03:34.357Z",
+              "WhenOpened": "2025-03-26T09:45:43.246Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAABMAAAAqAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "CreateUserDto.cs",
+              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\CreateUserDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\Account\\CreateUserDto.cs",
+              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\CreateUserDto.cs",
+              "RelativeToolTip": "Dtos\\Account\\CreateUserDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAkAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:11:25.141Z",
+              "WhenOpened": "2025-03-29T09:10:02.102Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Repository\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\ProductRepository.cs",
+              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Repository\\ProductRepository.cs",
+              "RelativeToolTip": "Repository\\ProductRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T10:29:08.632Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "AccountService.cs",
               "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Services\\AccountService.cs",
               "RelativeDocumentMoniker": "Services\\AccountService.cs",
@@ -215,12 +224,24 @@
               "RelativeToolTip": "Services\\AccountService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAABlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T10:10:44.272Z",
+              "WhenOpened": "2025-03-29T10:10:44.272Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DBHelper.cs",
+              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Repository\\DBHelper.cs",
+              "RelativeDocumentMoniker": "Repository\\DBHelper.cs",
+              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Repository\\DBHelper.cs",
+              "RelativeToolTip": "Repository\\DBHelper.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwDsAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-29T09:35:01.713Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Interfaces\\IUserRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IUserRepository.cs",
@@ -228,12 +249,11 @@
               "RelativeToolTip": "Interfaces\\IUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAsAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T09:19:21.265Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-28T09:19:21.265Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "IProductRepository.cs",
               "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Interfaces\\IProductRepository.cs",
               "RelativeDocumentMoniker": "Interfaces\\IProductRepository.cs",
@@ -241,25 +261,11 @@
               "RelativeToolTip": "Interfaces\\IProductRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T10:28:00.274Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T10:28:00.274Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Repository\\UserRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\UserRepository.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Repository\\UserRepository.cs",
-              "RelativeToolTip": "Repository\\UserRepository.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAcAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T09:45:43.246Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -267,38 +273,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T10:28:17.551Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\AccountController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Clients\\AccountController.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\AccountController.cs",
-              "RelativeToolTip": "Controllers\\Clients\\AccountController.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwBYAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T09:24:46.25Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T10:28:17.551Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 15,
-              "Title": "UpdateUserOfAdminDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserOfAdminDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\UpdateUserOfAdminDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserOfAdminDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\UpdateUserOfAdminDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T09:39:40.789Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
               "Title": "UserMappers.cs",
               "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Mappers\\UserMappers.cs",
               "RelativeDocumentMoniker": "Mappers\\UserMappers.cs",
@@ -306,8 +285,7 @@
               "RelativeToolTip": "Mappers\\UserMappers.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T09:35:30.241Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T09:35:30.241Z"
             }
           ]
         },

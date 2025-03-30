@@ -7,7 +7,7 @@
         public string Gmail { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string Gender { get; set; } = string.Empty;
-        public DateTime BirthOfDate { get; set; }
+        public DateTime? BirthOfDate { get; set; }
         public string PhoneNumber { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string AvatarUrl { get; set; } = string.Empty;
@@ -17,7 +17,7 @@
         public double Rating { get; set; }
         public string Role { get; set; } = string.Empty;
         public bool IsVerified { get; set; }
-        public DateTime UpdateAt { get; set; }
-        public DateTime CreateAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
+        public DateTime? CreateAt { get; set; }
     }
 }

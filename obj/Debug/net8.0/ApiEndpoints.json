@@ -81,7 +81,7 @@
       },
       {
         "Name": "BirthOfDate",
-        "Type": "System.DateTime",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -190,7 +190,7 @@
       },
       {
         "Name": "BirthOfDate",
-        "Type": "System.DateTime",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -319,7 +319,7 @@
       },
       {
         "Name": "BirthOfDate",
-        "Type": "System.DateTime",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
