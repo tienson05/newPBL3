@@ -1,0 +1,68 @@
+## Ignore Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Ignore build results
+bin/
+obj/
+out/
+
+## Ignore Rider IDE files
+.idea/
+
+## Ignore runtime-generated files
+*.db
+*.db-shm
+*.db-wal
+
+## ASP.NET Core secrets
+secrets.json
+**/secrets.json
+*.pfx
+*.key
+
+## Logs
+*.log
+logs/
+Logs/
+
+## ASP.NET Core environment settings
+appsettings.Development.json
+appsettings.*.local.json
+.env
+.env.*
+
+## Publish output
+publish/
+wwwroot/
+
+## Node modules (if using frontend assets)
+node_modules/
+
+## npm / yarn lock files
+package-lock.json
+yarn.lock
+
+## DotNet CLI artifacts
+project.lock.json
+project.fragment.lock.json
+
+## Coverage results
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+## Misc
+.DS_Store
+Thumbs.db
+
+## Resharper & JetBrains Rider
+_ReSharper*/
+*.DotSettings.user
+
+## VS Code settings (optional)
+.vscode/
