@@ -1,11 +1,8 @@
 ﻿using HeThongMoiGioiDoCu.Dtos.Account;
-using HeThongMoiGioiDoCu.DTOs.Account;
 using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Models;
-using HeThongMoiGioiDoCu.Repository;
 using HeThongMoiGioiDoCu.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace HeThongMoiGioiDoCu.Controllers.Admin
 {

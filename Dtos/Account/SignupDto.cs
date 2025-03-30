@@ -1,4 +1,4 @@
-﻿namespace HeThongMoiGioiDoCu.DTOs.Account
+﻿namespace HeThongMoiGioiDoCu.Dtos.Account
 {
     public class SignupDto
     {
