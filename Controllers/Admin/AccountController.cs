@@ -55,7 +55,8 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<ActionResult> Delete([FromRoute] int id) { 
+        public async Task<ActionResult> Delete([FromRoute] int id)
+        {
             await _userRepository.DeleteUserAsync(id);
             return Ok();
         }
@@ -78,7 +79,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateUser([FromForm]  CreateUserDto createUserDto)
+        public async Task<IActionResult> CreateUser([FromForm] CreateUserDto createUserDto)
         {
             var hashedPassword = _accountService.HashPassword(createUserDto.Password);
             await _userRepository.AddUserAsync(createUserDto.MapToUser(hashedPassword));
@@ -90,17 +91,20 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
         public async Task<IActionResult> GetUserToUpdate([FromRoute] int id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
-            if(user == null) return NotFound("User not found");
+            if (user == null)
+                return NotFound("User not found");
 
             return Ok(user.MapToUpdateUserOfAdminDto());
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateUser([FromForm] UpdateUserOfAdminDto updateUserOfAdminDto, [FromRoute] int id)
+        public async Task<IActionResult> UpdateUser(
+            [FromForm] UpdateUserOfAdminDto updateUserOfAdminDto,
+            [FromRoute] int id
+        )
         {
             await _userRepository.UpdateUserOfAdmin(updateUserOfAdminDto.MapToUser(id));
             return NoContent();
         }
-
     }
 }

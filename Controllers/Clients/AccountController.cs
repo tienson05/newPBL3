@@ -13,6 +13,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
     {
         private readonly IUserRepository _userRepository;
         private readonly AccountService _accountService;
+
         public AccountController(IUserRepository userRepository, AccountService accountService)
         {
             _userRepository = userRepository;
@@ -24,7 +25,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         {
             var existingEmail = await _userRepository.GetUserByEmailAsync(signupDto.Gmail);
 
-            if(existingEmail != null)
+            if (existingEmail != null)
             {
                 return Conflict("User with this email already exists.");
             }
@@ -39,21 +40,21 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         }
 
         [HttpPost("signin")]
-        public async Task<IActionResult> Signin([FromForm] SigninDto signinDto)
+        public async Task<IActionResult> Signin([FromBody] SigninDto signinDto)
         {
-            if(string.IsNullOrWhiteSpace(signinDto.Email))
+            if (string.IsNullOrWhiteSpace(signinDto.Email))
             {
-                return BadRequest("Email is required!");
+                return BadRequest("Email is required hehrhrh!");
             }
 
-            if(string.IsNullOrWhiteSpace(signinDto.Password))
+            if (string.IsNullOrWhiteSpace(signinDto.Password))
             {
                 return BadRequest("Password is required!");
             }
 
             var user = await _userRepository.GetUserByEmailAsync(signinDto.Email);
 
-            if(user == null || user.Role == "Admin")
+            if (user == null || user.Role == "Admin")
             {
                 return NotFound("User not found!");
             }
@@ -66,6 +67,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             return Unauthorized("Invalid password!");
         }
 
+
         [HttpPost("logout")] 
         public async Task<IActionResult> Logout([FromBody] LogoutUserDto logoutUserDto)
         {
@@ -77,11 +79,12 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null) {
+            if (user == null)
+            {
                 return NotFound("User not found");
             }
 
-            if(user.Status == "Inactive")
+            if (user.Status == "Inactive")
             {
                 return BadRequest("User not actived");
             }
@@ -93,13 +96,17 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         public async Task<IActionResult> GetUserInfor([FromRoute] int id)
         {
             var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null) return NotFound("User not exist");
+            if (user == null)
+                return NotFound("User not exist");
 
             return Ok(user.MapToUpdateUserDto());
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto updateUserDto, [FromRoute] int id)
+        public async Task<IActionResult> UpdateUser(
+            [FromBody] UpdateUserDto updateUserDto,
+            [FromRoute] int id
+        )
         {
             var user = updateUserDto.MapToUser(id);
             await _userRepository.UpdateUserAsync(user);
@@ -117,7 +124,6 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             List<User> users = await _userRepository.SearchUser(searchUserDto.MapToUser());
             if(users.Count == 0) return NotFound("Users not found!");
             return Ok(users.ToList());
-            
         }
     }
 }
