@@ -3,21 +3,25 @@ using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Mapper;
 using HeThongMoiGioiDoCu.Models;
 using HeThongMoiGioiDoCu.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HeThongMoiGioiDoCu.Controllers.Clients
 {
+
     [Route("api/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
         private readonly AccountService _accountService;
+        private readonly JwtTokenProviderService _jwtTokenProviderService;
 
-        public AccountController(IUserRepository userRepository, AccountService accountService)
+        public AccountController(IUserRepository userRepository, AccountService accountService, JwtTokenProviderService jwtTokenProviderService)
         {
             _userRepository = userRepository;
             _accountService = accountService;
+            _jwtTokenProviderService = jwtTokenProviderService;
         }
 
         [HttpPost("signup")]
@@ -61,13 +65,14 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
 
             if (_accountService.VerifyPassword(user.PasswordHash, signinDto.Password))
             {
-                return Ok(user.MapToUserViewDto());
+                var token = _jwtTokenProviderService.GenerateToken(user.Name, user.UserID, user.Role);
+                return Ok(new { token, user = user.MapToUserViewDto() });
             }
 
             return Unauthorized("Invalid password!");
         }
 
-
+        [Authorize]
         [HttpPost("logout")] 
         public async Task<IActionResult> Logout([FromBody] LogoutUserDto logoutUserDto)
         {
@@ -75,6 +80,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             return Ok(new { message = "Logged out successfully!" });
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
@@ -92,6 +98,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             return Ok(user.MapToUserViewDto());
         }
 
+        [Authorize]
         [HttpGet("update/{id}")]
         public async Task<IActionResult> GetUserInfor([FromRoute] int id)
         {
@@ -102,6 +109,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             return Ok(user.MapToUpdateUserDto());
         }
 
+        [Authorize]
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateUser(
             [FromBody] UpdateUserDto updateUserDto,
@@ -114,6 +122,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             return Ok("Updated successfully!");
         }
 
+        [Authorize]
         [HttpGet("search")]
         public async Task<IActionResult> SearchUser([FromQuery] SearchUserDto searchUserDto) {
             if (searchUserDto == null)

@@ -88,7 +88,27 @@ VALUES
 
 ---------------------------------------------------------------------------------------
 ALTER TABLE Users
-ADD Role INT NOT NULL DEFAULT 1;
+ADD CONSTRAINT DF_Role DEFAULT 2 FOR Role;
+
+
+ALTER TABLE Users
+DROP CONSTRAINT DF__Users__Role__04E4BC85;
+
+SELECT name 
+FROM sys.default_constraints
+WHERE parent_object_id = OBJECT_ID('Users') 
+AND col_name(parent_object_id, parent_column_id) = 'Role';
 
 ------------
 -- Tạo thêm bảng UserPermissions là để Admin có thể tùy chỉnh các quyền cho mỗi Manager
+
+SELECT 
+    p.PermissionName
+FROM 
+    RolePermissions rp
+JOIN 
+    Roles r ON rp.RoleID = r.RoleID
+JOIN 
+    Permissions p ON rp.PermissionID = p.PermissionID
+WHERE 
+    r.RoleName = 'Seller';  -- Lọc theo vai trò Admin

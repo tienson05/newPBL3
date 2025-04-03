@@ -1,23 +1,27 @@
-﻿using HeThongMoiGioiDoCu.Dtos.Account;
+﻿using System.Security.Claims;
+using HeThongMoiGioiDoCu.Dtos.Account;
 using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Mapper;
 using HeThongMoiGioiDoCu.Models;
 using HeThongMoiGioiDoCu.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HeThongMoiGioiDoCu.Controllers.Admin
 {
+    [Authorize]  // Đảm bảo rằng yêu cầu này chỉ được thực hiện khi người dùng đã có token hợp lệ
     [Route("api/admin/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
         private readonly AccountService _accountService;
-
-        public AccountController(IUserRepository userRepository, AccountService accountService)
+        private readonly JwtTokenProviderService _jwtTokenProviderService;
+        public AccountController(IUserRepository userRepository, AccountService accountService, JwtTokenProviderService jwtTokenProviderService)
         {
             _userRepository = userRepository;
             _accountService = accountService;
+            _jwtTokenProviderService = jwtTokenProviderService;
         }
 
         [HttpPost("signin")]
@@ -41,7 +45,8 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
 
             if (_accountService.VerifyPassword(user.PasswordHash, signinDto.Password))
             {
-                return Ok(user.MapToUserViewDto());
+                var token = _jwtTokenProviderService.GenerateToken(user.Name, user.UserID, user.Role);
+                return Ok(new {token, user = user.MapToUserViewDto()});
             }
 
             return Unauthorized("Invalid password");

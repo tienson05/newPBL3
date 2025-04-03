@@ -1,7 +1,10 @@
 ﻿using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Repository;
-using HeThongMoiGioiDoCu.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using HeThongMoiGioiDoCu.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,24 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 // Đăng ký AccountService vào DI container
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<JwtTokenProviderService>();
+
+// Cấu hình JWT Bearer Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            // Lấy giá trị từ file cấu hình (appsettings.json)
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
 
 // Cấu hình CORS
 builder.Services.AddCors(options =>
@@ -49,6 +70,7 @@ app.UseHttpsRedirection();
 // Áp dụng CORS
 app.UseCors("AllowFrontend");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
