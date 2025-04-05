@@ -3,7 +3,7 @@ using HeThongMoiGioiDoCu.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace HeThongMoiGioiDoCu.Repository
+namespace HeThongMoiGioiDoCu.Repository.ProductRepo
 {
     public class ProductRepository : IProductRepository
     {

@@ -5,6 +5,7 @@ using HeThongMoiGioiDoCu.Models;
 using HeThongMoiGioiDoCu.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace HeThongMoiGioiDoCu.Controllers.Clients
 {
@@ -13,21 +14,21 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IClientRepository _clientRepository;
         private readonly AccountService _accountService;
         private readonly JwtTokenProviderService _jwtTokenProviderService;
 
-        public AccountController(IUserRepository userRepository, AccountService accountService, JwtTokenProviderService jwtTokenProviderService)
+        public AccountController(AccountService accountService, JwtTokenProviderService jwtTokenProviderService, IClientRepository clientRepository)
         {
-            _userRepository = userRepository;
             _accountService = accountService;
             _jwtTokenProviderService = jwtTokenProviderService;
+            _clientRepository = clientRepository;
         }
 
         [HttpPost("signup")]
         public async Task<IActionResult> Signup([FromForm] SignupDto signupDto)
         {
-            var existingEmail = await _userRepository.GetUserByEmailAsync(signupDto.Gmail);
+            var existingEmail = await _clientRepository.GetUserByEmailAsync(signupDto.Gmail);
 
             if (existingEmail != null)
             {
@@ -38,7 +39,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
 
             var user = signupDto.MapToUser(hashedPassword);
 
-            await _userRepository.AddUserAsync(user);
+            await _clientRepository.AddUserAsync(user);
 
             return Ok("Signup successfully!");
         }
@@ -56,9 +57,9 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
                 return BadRequest("Password is required!");
             }
 
-            var user = await _userRepository.GetUserByEmailAsync(signinDto.Email);
+            var user = await _clientRepository.GetUserByEmailAsync(signinDto.Email);
 
-            if (user == null || user.Role == "Admin")
+            if (user == null || user.Role == 1)
             {
                 return NotFound("User not found!");
             }
@@ -74,17 +75,18 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
 
         [Authorize]
         [HttpPost("logout")] 
-        public async Task<IActionResult> Logout([FromBody] LogoutUserDto logoutUserDto)
+        public async Task<IActionResult> Logout()
         {
-            await _userRepository.UpdateLastLogin(logoutUserDto.UserID);
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await _clientRepository.UpdateLastLoginAsync(Convert.ToInt32(userId));
             return Ok(new { message = "Logged out successfully!" });
         }
 
         [Authorize]
-        [HttpGet("{id}")]
+        [HttpGet]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
-            var user = await _userRepository.GetUserByIdAsync(id);
+            var user = await _clientRepository.GetUserByIdAsync(id);
             if (user == null)
             {
                 return NotFound("User not found");
@@ -98,31 +100,21 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             return Ok(user.MapToUserViewDto());
         }
 
-        [Authorize]
-        [HttpGet("update/{id}")]
-        public async Task<IActionResult> GetUserInfor([FromRoute] int id)
-        {
-            var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null)
-                return NotFound("User not exist");
-
-            return Ok(user.MapToUpdateUserDto());
-        }
 
         [Authorize]
-        [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateUser(
-            [FromBody] UpdateUserDto updateUserDto,
-            [FromRoute] int id
-        )
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto updateUserDto)
         {
-            var user = updateUserDto.MapToUser(id);
-            await _userRepository.UpdateUserAsync(user);
+            //var userName = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            //var userRole = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = updateUserDto.MapToUser(Convert.ToInt32(userId));
+            await _clientRepository.UpdateUserAsync(user);
 
             return Ok("Updated successfully!");
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("search")]
         public async Task<IActionResult> SearchUser([FromQuery] SearchUserDto searchUserDto) {
             if (searchUserDto == null)
@@ -130,9 +122,17 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
                 return BadRequest("Invalid search parameters.");
             }
             
-            List<User> users = await _userRepository.SearchUser(searchUserDto.MapToUser());
-            if(users.Count == 0) return NotFound("Users not found!");
-            return Ok(users.ToList());
+            List<Users> users = await _clientRepository.SearchUserAsync(searchUserDto.MapToUser());
+            List<UserViewDto> userList = new List<UserViewDto>();
+            if (users.Count == 0) return NotFound("Users not found!");
+            else
+            {
+                foreach (var user in users)
+                {
+                    userList.Add(user.MapToUserViewDto());
+                }
+            }
+            return Ok(userList.ToList());
         }
     }
 }

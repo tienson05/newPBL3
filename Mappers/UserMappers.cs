@@ -6,9 +6,9 @@ namespace HeThongMoiGioiDoCu.Mapper
 {
     public static class UserMappers
     {
-        public static User MapToUser(this SignupDto signupDto, string hashedPassword)
+        public static Users MapToUser(this SignupDto signupDto, string hashedPassword)
         {
-            return new User
+            return new Users
             {
                 Username = signupDto.Username,
                 Gmail = signupDto.Gmail,
@@ -22,7 +22,7 @@ namespace HeThongMoiGioiDoCu.Mapper
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
                 IsVerified = true,
-                Role = "Buyer",
+                Role = 2,
                 Balance = 0,
                 TotalPosts = 0,
                 TotalPurchases = 0,
@@ -31,9 +31,9 @@ namespace HeThongMoiGioiDoCu.Mapper
             };
         }
 
-        public static User MapToUser(this UpdateUserDto updateUserDto, int id)
+        public static Users MapToUser(this UpdateUserDto updateUserDto, int id)
         {
-            return new User
+            return new Users
             {
                 UserID = id,
                 Username = updateUserDto.Username,
@@ -46,24 +46,56 @@ namespace HeThongMoiGioiDoCu.Mapper
                 AvatarUrl = updateUserDto.AvatarUrl,
             };
         }
-
-        public static UpdateUserDto MapToUpdateUserDto(this User user)
+        public static Users MapToUser(this CreateUserDto createUserDto, string hashedPassword)
         {
-            return new UpdateUserDto
+            return new Users
             {
-                UserID = user.UserID,
-                Username = user.Username,
-                Gmail = user.Gmail,
-                Name = user.Name,
-                Gender = user.Gender,
-                BirthOfDate = user.BirthOfDate,
-                PhoneNumber = user.PhoneNumber,
-                Address = user.Address,
-                AvatarUrl = user.AvatarUrl,
+                Username = createUserDto.Username,
+                Gmail = createUserDto.Gmail,
+                PasswordHash = hashedPassword,
+                Name = createUserDto.Name,
+                Gender = createUserDto.Gender,
+                BirthOfDate = createUserDto.BirthOfDate,
+                PhoneNumber = createUserDto.PhoneNumber,
+                Address = createUserDto.Address,
+                AvatarUrl = createUserDto.AvatarUrl,
+                Status = createUserDto.Status,
+                Role = 4,
+                IsVerified = createUserDto.IsVerified,
+                Permissions = createUserDto.Permissions,
             };
         }
 
-        public static UserViewDto MapToUserViewDto(this User user)
+        public static Users MapToUser(this UpdateUserOfAdminDto updateUserOfAdminDto, int id)
+        {
+            return new Users
+            {
+                UserID = id,
+                Username = updateUserOfAdminDto.Username,
+                Gmail = updateUserOfAdminDto.Gmail,
+                Name = updateUserOfAdminDto.Name,
+                Gender = updateUserOfAdminDto.Gender,
+                BirthOfDate = updateUserOfAdminDto.BirthOfDate,
+                PhoneNumber = updateUserOfAdminDto.PhoneNumber,
+                Address = updateUserOfAdminDto.Address,
+                AvatarUrl = updateUserOfAdminDto.AvatarUrl,
+                Status = updateUserOfAdminDto.Status,
+                Role = updateUserOfAdminDto.Role,
+                IsVerified = updateUserOfAdminDto.IsVerified,
+            };
+        }
+
+        public static Users MapToUser(this SearchUserDto searchUserDto) {
+            return new Users
+            {
+                Username = searchUserDto.UserName,
+                Gmail = searchUserDto.Gmail,
+                Name = searchUserDto.Name,
+                PhoneNumber = searchUserDto.PhoneNumber,
+            };
+        }
+
+        public static UserViewDto MapToUserViewDto(this Users user)
         {
             return new UserViewDto
             {
@@ -83,73 +115,7 @@ namespace HeThongMoiGioiDoCu.Mapper
                 Role = user.Role,
                 UpdatedAt = user.UpdatedAt,
                 CreatedAt = user.CreatedAt,
-            };
-        }
-
-        public static User MapToUser(this CreateUserDto createUserDto, string hashedPassword)
-        {
-            return new User
-            {
-                Username = createUserDto.Username,
-                Gmail = createUserDto.Gmail,
-                PasswordHash = hashedPassword,
-                Name = createUserDto.Name,
-                Gender = createUserDto.Gender,
-                BirthOfDate = createUserDto.BirthOfDate,
-                PhoneNumber = createUserDto.PhoneNumber,
-                Address = createUserDto.Address,
-                AvatarUrl = createUserDto.AvatarUrl,
-                Status = createUserDto.Status,
-                Role = createUserDto.Role,
-                IsVerified = createUserDto.IsVerified,
-            };
-        }
-
-        public static UpdateUserOfAdminDto MapToUpdateUserOfAdminDto(this User user)
-        {
-            return new UpdateUserOfAdminDto
-            {
-                Username = user.Username,
-                Gmail = user.Gmail,
-                Name = user.Name,
-                Gender = user.Gender,
-                BirthOfDate = user.BirthOfDate,
-                PhoneNumber = user.PhoneNumber,
-                Address = user.Address,
-                AvatarUrl = user.AvatarUrl,
-                Status = user.Status,
-                Role = user.Role,
-                IsVerified = user.IsVerified,
-                UserID = user.UserID
-            };
-        }
-
-        public static User MapToUser(this UpdateUserOfAdminDto updateUserOfAdminDto, int id)
-        {
-            return new User
-            {
-                UserID = id,
-                Username = updateUserOfAdminDto.Username,
-                Gmail = updateUserOfAdminDto.Gmail,
-                Name = updateUserOfAdminDto.Name,
-                Gender = updateUserOfAdminDto.Gender,
-                BirthOfDate = updateUserOfAdminDto.BirthOfDate,
-                PhoneNumber = updateUserOfAdminDto.PhoneNumber,
-                Address = updateUserOfAdminDto.Address,
-                AvatarUrl = updateUserOfAdminDto.AvatarUrl,
-                Status = updateUserOfAdminDto.Status,
-                Role = updateUserOfAdminDto.Role,
-                IsVerified = updateUserOfAdminDto.IsVerified,
-            };
-        }
-
-        public static User MapToUser(this SearchUserDto searchUserDto) {
-            return new User
-            {
-                Username = searchUserDto.UserName,
-                Gmail = searchUserDto.Gmail,
-                Name = searchUserDto.Name,
-                PhoneNumber = searchUserDto.PhoneNumber,
+                Permissions = user.Permissions,
             };
         }
     }

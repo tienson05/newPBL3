@@ -6,7 +6,7 @@ namespace HeThongMoiGioiDoCu.Models
 {
     public class Category
     {
-        public int CategoryID { get; set; }
+        public int CategoryID { get; set; } 
 
         [Required]
         [MaxLength(100)]

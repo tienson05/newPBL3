@@ -121,25 +121,6 @@
         "tags": [
           "Account"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogoutUserDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogoutUserDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogoutUserDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -147,7 +128,7 @@
         }
       }
     },
-    "/api/account/{id}": {
+    "/api/account": {
       "get": {
         "tags": [
           "Account"
@@ -170,42 +151,10 @@
         }
       }
     },
-    "/api/account/update/{id}": {
-      "get": {
-        "tags": [
-          "Account"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
+    "/api/account/update": {
       "put": {
         "tags": [
           "Account"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
         ],
         "requestBody": {
           "content": {
@@ -311,25 +260,6 @@
         "tags": [
           "Account"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogoutUserDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogoutUserDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogoutUserDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -383,6 +313,18 @@
         }
       }
     },
+    "/api/admin/account": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/admin/account/create": {
       "post": {
         "tags": [
@@ -426,7 +368,15 @@
                     "type": "string"
                   },
                   "Role": {
-                    "type": "string"
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Permissions": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
                   },
                   "IsVerified": {
                     "type": "boolean"
@@ -467,6 +417,9 @@
                 "Role": {
                   "style": "form"
                 },
+                "Permissions": {
+                  "style": "form"
+                },
                 "IsVerified": {
                   "style": "form"
                 }
@@ -482,27 +435,6 @@
       }
     },
     "/api/admin/account/update/{id}": {
-      "get": {
-        "tags": [
-          "Account"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
       "put": {
         "tags": [
           "Account"
@@ -557,7 +489,8 @@
                     "type": "string"
                   },
                   "Role": {
-                    "type": "string"
+                    "type": "integer",
+                    "format": "int32"
                   },
                   "IsVerified": {
                     "type": "boolean"
@@ -605,6 +538,48 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/account/search": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "parameters": [
+          {
+            "name": "UserName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Gmail",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PhoneNumber",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1055,16 +1030,6 @@
         },
         "additionalProperties": false
       },
-      "LogoutUserDto": {
-        "type": "object",
-        "properties": {
-          "userID": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
       "Product": {
         "type": "object",
         "properties": {
@@ -1120,7 +1085,7 @@
             "nullable": true
           },
           "user": {
-            "$ref": "#/components/schemas/User"
+            "$ref": "#/components/schemas/Users"
           },
           "category": {
             "$ref": "#/components/schemas/Category"
@@ -1230,7 +1195,7 @@
         },
         "additionalProperties": false
       },
-      "User": {
+      "Users": {
         "type": "object",
         "properties": {
           "userID": {
@@ -1295,8 +1260,8 @@
             "nullable": true
           },
           "role": {
-            "type": "string",
-            "nullable": true
+            "type": "integer",
+            "format": "int32"
           },
           "isVerified": {
             "type": "boolean"
@@ -1314,6 +1279,14 @@
           "createdAt": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           }
         },

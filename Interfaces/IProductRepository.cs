@@ -1,5 +1,4 @@
 ﻿using HeThongMoiGioiDoCu.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace HeThongMoiGioiDoCu.Interfaces
 {

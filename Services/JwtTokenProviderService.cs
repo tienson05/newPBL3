@@ -22,7 +22,7 @@ namespace HeThongMoiGioiDoCu.Services
             _expirationTimeInYears = int.Parse(configuration["Jwt:ExpirationInYears"]);
         }
 
-        public string GenerateToken(string name, int userId, string roleName)
+        public string GenerateToken(string name, int userId, int roleName)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -30,7 +30,7 @@ namespace HeThongMoiGioiDoCu.Services
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, name),
-                new Claim(ClaimTypes.Role, roleName),
+                new Claim(ClaimTypes.Role, Convert.ToString(roleName)),
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString())
             };
 

@@ -9,19 +9,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HeThongMoiGioiDoCu.Controllers.Admin
 {
-    [Authorize]  // Đảm bảo rằng yêu cầu này chỉ được thực hiện khi người dùng đã có token hợp lệ
+    //[Authorize]
     [Route("api/admin/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IAdminRepository _adminRepository;
         private readonly AccountService _accountService;
         private readonly JwtTokenProviderService _jwtTokenProviderService;
-        public AccountController(IUserRepository userRepository, AccountService accountService, JwtTokenProviderService jwtTokenProviderService)
+        public AccountController(AccountService accountService, JwtTokenProviderService jwtTokenProviderService, IAdminRepository adminRepository)
         {
-            _userRepository = userRepository;
             _accountService = accountService;
             _jwtTokenProviderService = jwtTokenProviderService;
+            _adminRepository = adminRepository;
         }
 
         [HttpPost("signin")]
@@ -37,7 +37,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
                 return BadRequest("Email is required.");
             }
 
-            var user = await _userRepository.GetUserByEmailAsync(signinDto.Email);
+            var user = await _adminRepository.GetUserByEmailAsync(signinDto.Email);
             if (user == null)
             {
                 return NotFound("User not found");
@@ -53,23 +53,28 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
         }
 
         [HttpPost("logout")]
-        public async Task<IActionResult> Logout([FromBody] LogoutUserDto logoutUserDto)
+        public async Task<IActionResult> Logout()
         {
-            await _userRepository.UpdateLastLogin(logoutUserDto.UserID);
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await _adminRepository.UpdateLastLoginAsync(Convert.ToInt32(userId));
             return Ok(new { message = "Logged out successfully" }); 
         }
 
         [HttpDelete("delete/{id}")]
         public async Task<ActionResult> Delete([FromRoute] int id)
         {
-            await _userRepository.DeleteUserAsync(id);
+            await _adminRepository.DeleteUserAsync(id);
             return Ok();
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
-            var user = await _userRepository.GetUserByIdAsync(id);
+            //var userName = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            //var userRole = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+            //var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _adminRepository.GetUserByIdAsync(id);
             if (user == null)
             {
                 return NotFound("User not found");
@@ -83,23 +88,20 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
             return Ok(user.MapToUserViewDto());
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllUser()
+        {
+            var list = await _adminRepository.GetAllUserAsync();
+            return Ok(list.ToList());
+        }
+
         [HttpPost("create")]
         public async Task<IActionResult> CreateUser([FromForm] CreateUserDto createUserDto)
         {
             var hashedPassword = _accountService.HashPassword(createUserDto.Password);
-            await _userRepository.AddUserAsync(createUserDto.MapToUser(hashedPassword));
+            await _adminRepository.AddUserAsync(createUserDto.MapToUser(hashedPassword));
 
             return Ok(new { message = "Creating user successfully" });
-        }
-
-        [HttpGet("update/{id}")]
-        public async Task<IActionResult> GetUserToUpdate([FromRoute] int id)
-        {
-            var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null)
-                return NotFound("User not found");
-
-            return Ok(user.MapToUpdateUserOfAdminDto());
         }
 
         [HttpPut("update/{id}")]
@@ -108,8 +110,29 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
             [FromRoute] int id
         )
         {
-            await _userRepository.UpdateUserOfAdmin(updateUserOfAdminDto.MapToUser(id));
-            return NoContent();
+            await _adminRepository.UpdateUserAsync(updateUserOfAdminDto.MapToUser(id));
+            return Ok();
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchUser([FromQuery] SearchUserDto searchUserDto)
+        {
+            if (searchUserDto == null)
+            {
+                return BadRequest("Invalid search parameters.");
+            }
+
+            List<Users> users = await _adminRepository.SearchUserAsync(searchUserDto.MapToUser());
+            List<UserViewDto> userList= new List<UserViewDto>();
+            if (users.Count == 0) return NotFound("Users not found!");
+            else
+            {
+                foreach (var user in users)
+                {
+                    userList.Add(user.MapToUserViewDto());
+                }
+            }
+            return Ok(userList.ToList());
         }
     }
 }

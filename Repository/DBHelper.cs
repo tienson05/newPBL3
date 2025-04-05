@@ -8,7 +8,7 @@ namespace HeThongMoiGioiDoCu.Repository
     {
         private static DBHelper _Instance;
 
-        private SqlConnection cnn;
+        //private SqlConnection cnn;
         private static string connectionString = @"Server=TIENSON;Database=OldGoodsMarketplace;Integrated Security=True;TrustServerCertificate=True;";
 
         public static DBHelper Instance
@@ -25,54 +25,85 @@ namespace HeThongMoiGioiDoCu.Repository
 
         private DBHelper(string s)
         {
-            cnn = new SqlConnection(connectionString);
+            //cnn = new SqlConnection(connectionString);
         }
 
-        public DataTable GetRecords(string sql)
+        public async Task<DataTable> GetRecordsAsync(string sql)
         {
             try
             {
-                SqlDataAdapter da = new SqlDataAdapter(sql, cnn);
+                using (SqlConnection cnn = new SqlConnection(connectionString))
+                using (SqlDataAdapter da = new SqlDataAdapter(sql, cnn))
+                {
+                    DataTable dt = new DataTable();
+                    await cnn.OpenAsync();
+                    da.Fill(dt);
+                    //cnn.Close();
+                    return dt;
+                }                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                throw;
+            }
+
+        }
+        public async Task<DataTable> GetRecordsAsync(string sql, params SqlParameter[] p)
+        {
+            try
+            {
                 DataTable dt = new DataTable();
-                cnn.Open();
-                da.Fill(dt);
-                cnn.Close();
+                using (SqlConnection cnn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, cnn))
+                {                 
+                    cmd.Parameters.AddRange(p);     
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        await cnn.OpenAsync();  // Mở kết nối
+                        da.Fill(dt); // Điền dữ liệu vào DataTable
+                    }
+                }
                 return dt;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("An error occurred: " + ex.Message);
-                throw;
-            }
-
+                throw;  
+            }          
         }
 
+
         // Thực thi câu lệnh SQL mà không trả về kết quả (ví dụ: INSERT, UPDATE, DELETE).
-        public void ExecuteDB(string sql)
+        public async Task ExecuteDBAsync(string sql)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand(sql, cnn);
-                cnn.Open();
-                cmd.ExecuteNonQuery();
-                cnn.Close();
+                using (SqlConnection cnn = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(sql, cnn))
+                {
+                    await cnn.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                    cnn.Close();
+                }                   
             }
             catch (Exception ex)
             {
                 Console.WriteLine("An error occurred: " + ex.Message);
                 throw;
-            }
+            }         
         }
 
-        public void ExecuteDB(string sql, params SqlParameter[] p)
+        public async Task ExecuteDBAsync(string sql, params SqlParameter[] p)
         {
             try
             {
+                using (SqlConnection cnn = new SqlConnection(connectionString))
                 using (SqlCommand cmd = new SqlCommand(sql, cnn))
                 {
                     cmd.Parameters.AddRange(p);
-                    cnn.Open();
-                    cmd.ExecuteNonQuery();
+                    await cnn.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
                     cnn.Close();
                 }
             }
