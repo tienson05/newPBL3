@@ -105,10 +105,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateUser(
-            [FromForm] UpdateUserOfAdminDto updateUserOfAdminDto,
-            [FromRoute] int id
-        )
+        public async Task<IActionResult> UpdateUser([FromForm] UpdateUserOfAdminDto updateUserOfAdminDto, [FromRoute] int id)
         {
             await _adminRepository.UpdateUserAsync(updateUserOfAdminDto.MapToUser(id));
             return Ok();

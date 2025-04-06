@@ -209,5 +209,16 @@ namespace HeThongMoiGioiDoCu.Repository.UserRepo
             return list;
         }
 
+        public async Task RegisterSeller(int id)
+        {
+            if (id != 1 && id != 3 && id != 4) {
+                string sql = "UPDATE Users SET Role = 3 WHERE UserID = @UserID";
+                var parameters = new SqlParameter[] {
+                    new SqlParameter("UserID", id),
+                };
+
+                await DBHelper.Instance.ExecuteDBAsync(sql, parameters);
+            }
+        }
     }
 }

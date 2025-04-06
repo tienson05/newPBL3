@@ -27,6 +27,16 @@
   },
   {
     "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.AccountController",
+    "Method": "RegisterSeller",
+    "RelativePath": "api/account/registerseller",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.AccountController",
     "Method": "SearchUser",
     "RelativePath": "api/account/search",
     "HttpMethod": "GET",

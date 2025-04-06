@@ -224,6 +224,18 @@
         }
       }
     },
+    "/api/account/registerseller": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/admin/account/signin": {
       "post": {
         "tags": [

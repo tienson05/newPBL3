@@ -59,7 +59,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
 
             var user = await _clientRepository.GetUserByEmailAsync(signinDto.Email);
 
-            if (user == null || user.Role == 1)
+            if (user == null || user.Role == 1 || user.Role == 4)
             {
                 return NotFound("User not found!");
             }
@@ -133,6 +133,15 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
                 }
             }
             return Ok(userList.ToList());
+        }
+
+        //[Authorize]
+        [HttpPost("registerseller")]
+        public async Task<IActionResult> RegisterSeller()
+        {
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await _clientRepository.RegisterSeller(Convert.ToInt32(userId));
+            return Ok();
         }
     }
 }
