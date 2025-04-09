@@ -1,13 +1,17 @@
-﻿using HeThongMoiGioiDoCu.Interfaces;
+﻿using HeThongMoiGioiDoCu.Dtos.Category;
+using HeThongMoiGioiDoCu.Interfaces;
+using HeThongMoiGioiDoCu.Mappers;
 using HeThongMoiGioiDoCu.Models;
 using HeThongMoiGioiDoCu.Repository;
 using HeThongMoiGioiDoCu.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HeThongMoiGioiDoCu.Controllers.Clients
 {
     [Route("api/category")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;
@@ -25,9 +29,11 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         [HttpPost]
         public async Task<IActionResult> AddCategory([FromBody] Category category)
         {
-            var createdcategory = await _categoryRepository.AddCategory(category);
-            return CreatedAtAction(nameof(GetCategoryById), new { id = createdcategory.CategoryID }, createdcategory);
+            var createdCategory = await _categoryRepository.AddCategory(category);
+            var createdCategoryDto = createdCategory.MapToCategoryDto();
+            return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.CategoryID }, createdCategoryDto);
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategoryById(int id)
         {

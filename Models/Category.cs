@@ -13,9 +13,9 @@ namespace HeThongMoiGioiDoCu.Models
         public string CategoryName { get; set; }
 
         public DateTime? CreatedAt { get; set; }
- 
+
         [JsonIgnore]
-        public ICollection<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; } = new List<Product>();
         public Category()
         {
             CreatedAt ??= DateTime.Now;

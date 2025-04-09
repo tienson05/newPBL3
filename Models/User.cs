@@ -14,7 +14,7 @@ namespace HeThongMoiGioiDoCu.Models
         public DateTime? BirthOfDate { get; set; }
         public string PhoneNumber { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
-        public string AvatarUrl { get; set; } = string.Empty;
+        public string? AvatarUrl { get; set; } = string.Empty;
         public decimal Balance { get; set; }
         public int TotalPosts { get; set; }
         public int TotalPurchases { get; set; }

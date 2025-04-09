@@ -1,4 +1,5 @@
-﻿using HeThongMoiGioiDoCu.Models;
+﻿using HeThongMoiGioiDoCu.Dtos.Category;
+using HeThongMoiGioiDoCu.Models;
 
 namespace HeThongMoiGioiDoCu.Interfaces
 {
