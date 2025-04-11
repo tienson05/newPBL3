@@ -2,6 +2,7 @@
 using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Mapper;
 using HeThongMoiGioiDoCu.Models;
+using HeThongMoiGioiDoCu.Repository.UserRepo;
 using HeThongMoiGioiDoCu.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -141,6 +142,26 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         {
             var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             await _clientRepository.RegisterSeller(Convert.ToInt32(userId));
+            return Ok();
+        }
+
+        [HttpPut("resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
+        {
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _clientRepository.GetUserByIdAsync(Convert.ToInt32(userId));
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            string hashedCurrentPassword = _accountService.HashPassword(resetPasswordDto.CurrentPassword);
+
+            if (!_accountService.VerifyPassword(user.PasswordHash, hashedCurrentPassword))
+            {
+                return BadRequest("Password is incorrect");
+            }
+            await _clientRepository.ResetPasswordAsync(resetPasswordDto.NewPassword, Convert.ToInt32(userId));
             return Ok();
         }
     }

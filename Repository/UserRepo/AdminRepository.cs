@@ -275,6 +275,19 @@ namespace HeThongMoiGioiDoCu.Repository.UserRepo
             await DBHelper.Instance.ExecuteDBAsync(sqlDeleteUser, parameterUser);
         }
 
+        public async Task BanUserAsync(int id)
+        {
+            string sqlBanUser = "UPDATE Users SET Status = 'Banned' WHERE UserID = @UserID";
+            var parameters = new SqlParameter("UserID", id);
+            await DBHelper.Instance.ExecuteDBAsync(sqlBanUser, parameters);
+        }
+
+        public async Task UndoBanUserAsync(int id)
+        {
+            string sqlUndoBan = "UPDATE User SET Status = 'Active' WHERE UserID = @UserID";
+            var parameters = new SqlParameter("UserID", id);
+            await DBHelper.Instance.ExecuteDBAsync(sqlUndoBan, parameters);
+        }
         public async Task<List<Users>> SearchUserAsync(Users user)
         {
             string sql = "SELECT * FROM Users WHERE 1=1 ";
@@ -314,6 +327,17 @@ namespace HeThongMoiGioiDoCu.Repository.UserRepo
             }
 
             return list;
+        }
+
+        public async Task ResetPasswordAsync(string newPassword, int id)
+        {
+            string sql = "UPDATE User SET PasswordHash = @PasswordHash WHERE UserID = @UserID";
+            var parameters = new SqlParameter[] { 
+                new SqlParameter("PasswordHash", newPassword),
+                new SqlParameter("UserID", id)
+            };
+
+            await DBHelper.Instance.ExecuteDBAsync(sql, parameters);
         }
     }
 }

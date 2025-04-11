@@ -11,6 +11,6 @@ namespace HeThongMoiGioiDoCu.Interfaces
         Task UpdateUserAsync(Users user);
         Task UpdateLastLoginAsync(int id);
         Task<List<Users>> SearchUserAsync(Users user);
-
+        Task ResetPasswordAsync(string newPassword, int id);
     }
 }

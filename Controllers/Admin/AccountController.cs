@@ -67,6 +67,19 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
             return Ok();
         }
 
+        [HttpPost("ban/{id}")]
+        public async Task<IActionResult> Ban([FromRoute] int id)
+        {
+            await _adminRepository.BanUserAsync(id);
+            return Ok();
+        }
+
+        [HttpPost("undoban/{id}")]
+        public async Task<IActionResult> UndoBan(int id)
+        {
+            await _adminRepository.UndoBanUserAsync(id);
+            return Ok();
+        }
         [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser([FromRoute] int id)
@@ -78,11 +91,6 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
             if (user == null)
             {
                 return NotFound("User not found");
-            }
-
-            if (user.Status == "Banned" || user.Status == "Inactive")
-            {
-                return BadRequest("User not actived");
             }
 
             return Ok(user.MapToUserViewDto());
@@ -130,6 +138,26 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
                 }
             }
             return Ok(userList.ToList());
+        }
+
+        [HttpPut("resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
+        {
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _adminRepository.GetUserByIdAsync(Convert.ToInt32(userId));
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            string hashedCurrentPassword = _accountService.HashPassword(resetPasswordDto.CurrentPassword);
+
+            if (!_accountService.VerifyPassword(user.PasswordHash, hashedCurrentPassword))
+            {
+                return BadRequest("Password is incorrect");
+            }
+            await _adminRepository.ResetPasswordAsync(resetPasswordDto.NewPassword, Convert.ToInt32(userId));
+            return Ok();
         }
     }
 }

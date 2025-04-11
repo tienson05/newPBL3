@@ -220,5 +220,16 @@ namespace HeThongMoiGioiDoCu.Repository.UserRepo
                 await DBHelper.Instance.ExecuteDBAsync(sql, parameters);
             }
         }
+
+        public async Task ResetPasswordAsync(string newPassword, int id)
+        {
+            string sql = "UPDATE User SET PasswordHash = @PasswordHash WHERE UserID = @UserID";
+            var parameters = new SqlParameter[] {
+                new SqlParameter("PasswordHash", newPassword),
+                new SqlParameter("UserID", id)
+            };
+
+            await DBHelper.Instance.ExecuteDBAsync(sql, parameters);
+        }
     }
 }
