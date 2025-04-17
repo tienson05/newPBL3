@@ -18,7 +18,7 @@ namespace HeThongMoiGioiDoCu.Models
         public DateTime? UpdatedAt { get; set; }
 
         // Optional: Navigation properties
-        public User? User { get; set; }
+        public Users? User { get; set; }
         public Category? Category { get; set; }
 
         public Product()

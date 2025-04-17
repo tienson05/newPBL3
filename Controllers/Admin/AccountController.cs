@@ -1,22 +1,27 @@
-﻿using HeThongMoiGioiDoCu.Dtos.Account;
+﻿using System.Security.Claims;
+using HeThongMoiGioiDoCu.Dtos.Account;
 using HeThongMoiGioiDoCu.Interfaces;
+using HeThongMoiGioiDoCu.Mapper;
 using HeThongMoiGioiDoCu.Models;
 using HeThongMoiGioiDoCu.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HeThongMoiGioiDoCu.Controllers.Admin
 {
+    //[Authorize]
     [Route("api/admin/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IAdminRepository _adminRepository;
         private readonly AccountService _accountService;
-
-        public AccountController(IUserRepository userRepository, AccountService accountService)
+        private readonly JwtTokenProviderService _jwtTokenProviderService;
+        public AccountController(AccountService accountService, JwtTokenProviderService jwtTokenProviderService, IAdminRepository adminRepository)
         {
-            _userRepository = userRepository;
             _accountService = accountService;
+            _jwtTokenProviderService = jwtTokenProviderService;
+            _adminRepository = adminRepository;
         }
 
         [HttpPost("signin")]
@@ -32,7 +37,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
                 return BadRequest("Email is required.");
             }
 
-            var user = await _userRepository.GetUserByEmailAsync(signinDto.Email);
+            var user = await _adminRepository.GetUserByEmailAsync(signinDto.Email);
             if (user == null)
             {
                 return NotFound("User not found");
@@ -40,157 +45,119 @@ namespace HeThongMoiGioiDoCu.Controllers.Admin
 
             if (_accountService.VerifyPassword(user.PasswordHash, signinDto.Password))
             {
-                return Ok(
-                    new UserViewDto
-                    {
-                        UserID = user.UserID,
-                        Name = user.Name,
-                        Gmail = user.Gmail,
-                        PhoneNumber = user.PhoneNumber,
-                        Address = user.Address,
-                        AvatarUrl = user.AvatarUrl,
-                        Username = user.Username,
-                        Gender = user.Gender,
-                        BirthOfDate = user.BirthOfDate,
-                        Balance = user.Balance,
-                        TotalPosts = user.TotalPosts,
-                        TotalPurchases = user.TotalPurchases,
-                        Rating = user.Rating,
-                        Role = user.Role,
-                        UpdatedAt = user.UpdatedAt,
-                        CreatedAt = user.CreatedAt,
-                    }
-                );
+                var token = _jwtTokenProviderService.GenerateToken(user.Name, user.UserID, user.Role);
+                return Ok(new {token, user = user.MapToUserViewDto()});
             }
 
             return Unauthorized("Invalid password");
         }
 
         [HttpPost("logout")]
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            // Xử lý logout: Xóa token hoặc cookie nếu cần
-            return Ok(new { message = "Logged out successfully" });
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await _adminRepository.UpdateLastLoginAsync(Convert.ToInt32(userId));
+            return Ok(new { message = "Logged out successfully" }); 
         }
 
         [HttpDelete("delete/{id}")]
         public async Task<ActionResult> Delete([FromRoute] int id)
         {
-            await _userRepository.DeleteUserAsync(id);
+            await _adminRepository.DeleteUserAsync(id);
             return Ok();
         }
 
+        [HttpPost("ban/{id}")]
+        public async Task<IActionResult> Ban([FromRoute] int id)
+        {
+            await _adminRepository.BanUserAsync(id);
+            return Ok();
+        }
+
+        [HttpPost("undoban/{id}")]
+        public async Task<IActionResult> UndoBan(int id)
+        {
+            await _adminRepository.UndoBanUserAsync(id);
+            return Ok();
+        }
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
-            var user = await _userRepository.GetUserByIdAsync(id);
+            //var userName = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            //var userRole = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+            //var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _adminRepository.GetUserByIdAsync(id);
             if (user == null)
             {
                 return NotFound("User not found");
             }
 
-            if (user.Status == "Banned" || user.Status == "Inactive")
-            {
-                return BadRequest("User not actived");
-            }
+            return Ok(user.MapToUserViewDto());
+        }
 
-            return Ok(
-                new UserViewDto
-                {
-                    UserID = user.UserID,
-                    Gmail = user.Gmail,
-                    Username = user.Username,
-                    Name = user.Name,
-                    Gender = user.Gender,
-                    BirthOfDate = user.BirthOfDate,
-                    PhoneNumber = user.PhoneNumber,
-                    Address = user.Address,
-                    AvatarUrl = user.AvatarUrl,
-                    Role = user.Role,
-                    Balance = user.Balance,
-                    TotalPosts = user.TotalPosts,
-                    TotalPurchases = user.TotalPurchases,
-                    IsVerified = user.IsVerified,
-                    Rating = user.Rating,
-                    UpdatedAt = user.UpdatedAt,
-                    CreatedAt = user.CreatedAt,
-                }
-            );
+        [HttpGet]
+        public async Task<IActionResult> GetAllUser()
+        {
+            var list = await _adminRepository.GetAllUserAsync();
+            return Ok(list.ToList());
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> CreateUser([FromForm] CreateUserDto createUserDto)
         {
-            User user = new User()
-            {
-                Username = createUserDto.Username,
-                Gmail = createUserDto.Gmail,
-                PasswordHash = _accountService.HashPassword(createUserDto.Password),
-                Name = createUserDto.Name,
-                Gender = createUserDto.Gender,
-                BirthOfDate = createUserDto.BirthOfDate,
-                PhoneNumber = createUserDto.PhoneNumber,
-                Address = createUserDto.Address,
-                AvatarUrl = createUserDto.AvatarUrl,
-                Status = createUserDto.Status,
-                Role = createUserDto.Role,
-                IsVerified = createUserDto.IsVerified,
-            };
-            await _userRepository.AddUserAsync(user);
+            var hashedPassword = _accountService.HashPassword(createUserDto.Password);
+            await _adminRepository.AddUserAsync(createUserDto.MapToUser(hashedPassword));
 
             return Ok(new { message = "Creating user successfully" });
         }
 
-        [HttpGet("update/{id}")]
-        public async Task<IActionResult> GetUserToUpdate([FromRoute] int id)
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> UpdateUser([FromForm] UpdateUserOfAdminDto updateUserOfAdminDto, [FromRoute] int id)
         {
-            var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null)
-                return NotFound("User not found");
-
-            return Ok(
-                new UpdateUserOfAdminDto
-                {
-                    Username = user.Username,
-                    Gmail = user.Gmail,
-                    Name = user.Name,
-                    Gender = user.Gender,
-                    BirthOfDate = user.BirthOfDate,
-                    PhoneNumber = user.PhoneNumber,
-                    Address = user.Address,
-                    AvatarUrl = user.AvatarUrl,
-                    Status = user.Status,
-                    Role = user.Role,
-                    IsVerified = user.IsVerified,
-                    UserID = user.UserID,
-                }
-            );
+            await _adminRepository.UpdateUserAsync(updateUserOfAdminDto.MapToUser(id));
+            return Ok();
         }
 
-        [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateUser(
-            [FromForm] UpdateUserOfAdminDto updateUserOfAdminDto,
-            [FromRoute] int id
-        )
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchUser([FromQuery] SearchUserDto searchUserDto)
         {
-            var user = new User
+            if (searchUserDto == null)
             {
-                UserID = id,
-                Username = updateUserOfAdminDto.Username,
-                Gmail = updateUserOfAdminDto.Gmail,
-                Name = updateUserOfAdminDto.Name,
-                Gender = updateUserOfAdminDto.Gender,
-                BirthOfDate = updateUserOfAdminDto.BirthOfDate,
-                PhoneNumber = updateUserOfAdminDto.PhoneNumber,
-                Address = updateUserOfAdminDto.Address,
-                AvatarUrl = updateUserOfAdminDto.AvatarUrl,
-                Status = updateUserOfAdminDto.Status,
-                Role = updateUserOfAdminDto.Role,
-                IsVerified = updateUserOfAdminDto.IsVerified,
-            };
+                return BadRequest("Invalid search parameters.");
+            }
 
-            await _userRepository.UpdateUserOfAdmin(user);
-            return NoContent();
+            List<Users> users = await _adminRepository.SearchUserAsync(searchUserDto.MapToUser());
+            List<UserViewDto> userList= new List<UserViewDto>();
+            if (users.Count == 0) return NotFound("Users not found!");
+            else
+            {
+                foreach (var user in users)
+                {
+                    userList.Add(user.MapToUserViewDto());
+                }
+            }
+            return Ok(userList.ToList());
+        }
+
+        [HttpPut("resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
+        {
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _adminRepository.GetUserByIdAsync(Convert.ToInt32(userId));
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            string hashedCurrentPassword = _accountService.HashPassword(resetPasswordDto.CurrentPassword);
+
+            if (!_accountService.VerifyPassword(user.PasswordHash, hashedCurrentPassword))
+            {
+                return BadRequest("Password is incorrect");
+            }
+            await _adminRepository.ResetPasswordAsync(resetPasswordDto.NewPassword, Convert.ToInt32(userId));
+            return Ok();
         }
     }
 }

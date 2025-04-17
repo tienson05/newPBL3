@@ -26,6 +26,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
         {
             return await _categoryRepository.GetListCategory();
         }
+
         [HttpPost]
         public async Task<IActionResult> AddCategory([FromBody] CategoryDto dto)
         {
@@ -54,13 +55,15 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
 
             }
         }
+
         [HttpPut("{id}")]
-        public async Task<ActionResult<Category>> UpdateCategory(int id, [FromBody] Category category)
+        public async Task<ActionResult<Category>> UpdateCategory([FromRoute] int id, [FromBody] Category category)
         {
             var newCategory = await _categoryRepository.UpdateCategory(id, category.CategoryName);
 
             return newCategory != null ? newCategory : NotFound("Category not found!");
         }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCategory(int id)
         {

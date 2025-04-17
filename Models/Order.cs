@@ -10,8 +10,8 @@
         public DateTime? CreatedAt { get; set; }
         public DateTime? CompletedAt { get; set; }
 
-        public User Buyer { get; set; }
-        public User Vendor { get; set; }
+        public Users Buyer { get; set; }
+        public Users Vendor { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
         public Order()

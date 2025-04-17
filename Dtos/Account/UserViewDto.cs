@@ -15,9 +15,10 @@
         public int TotalPosts { get; set; }
         public int TotalPurchases { get; set; }
         public double Rating { get; set; }
-        public string Role { get; set; } = string.Empty;
+        public int Role { get; set; }
         public bool IsVerified { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public List<int> Permissions { get; set; } = new List<int>();
     }
 }

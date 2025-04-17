@@ -6,11 +6,11 @@ namespace HeThongMoiGioiDoCu.Services
 
     public class AccountService
     {
-        private readonly PasswordHasher<User> _passwordHasher;
+        private readonly PasswordHasher<Users> _passwordHasher;
 
         public AccountService()
         {
-            _passwordHasher = new PasswordHasher<User>();
+            _passwordHasher = new PasswordHasher<Users>();
         }
 
         public string HashPassword(string password)

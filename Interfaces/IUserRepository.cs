@@ -4,11 +4,13 @@ namespace HeThongMoiGioiDoCu.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User> GetUserByEmailAsync(string email);
-        Task<User> GetUserByIdAsync(int id);
-        Task AddUserAsync(User user);
-        Task UpdateUserAsync(User user);
-        Task DeleteUserAsync(int id);
-        Task UpdateUserOfAdmin(User user);
+        Task<Users> GetUserByEmailAsync(string email);
+        Task<Users> GetUserByIdAsync(int id);
+        Task<List<Users>> GetAllUserAsync();
+        Task AddUserAsync(Users user);
+        Task UpdateUserAsync(Users user);
+        Task UpdateLastLoginAsync(int id);
+        Task<List<Users>> SearchUserAsync(Users user);
+        Task ResetPasswordAsync(string newPassword, int id);
     }
 }

@@ -1,91 +1,68 @@
 ﻿using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Repository;
-using HeThongMoiGioiDoCu.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using System.Text;
+using HeThongMoiGioiDoCu.Services;
+using HeThongMoiGioiDoCu.Repository.UserRepo;
+using HeThongMoiGioiDoCu.Repository.ProductRepo;
+using HeThongMoiGioiDoCu.Repository.CategoryRepo;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Cấu hình DbContext với kết nối đến cơ sở dữ liệu
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-//// Đăng ký dịch vụ UserRepository
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// Đăng ký dịch vụ UserRepository và các dịch vụ khác
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-
 
 // Đăng ký AccountService vào DI container
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<JwtTokenProviderService>();
 
-// Add services to the container.
+// Cấu hình JWT Bearer Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            // Lấy giá trị từ file cấu hình (appsettings.json)
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
+
+// Cấu hình CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://127.0.0.1:5500", "http://localhost:5500") // Địa chỉ của Frontend
+              .AllowAnyHeader()   // Cho phép bất kỳ header
+              .AllowAnyMethod();  // Cho phép bất kỳ phương thức HTTP (GET, POST, v.v.)
+    });
+});
+
+// Thêm dịch vụ controllers (Web API)
 builder.Services.AddControllers();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Cấu hình Swagger/OpenAPI cho API
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    var key = builder.Configuration["Jwt:Key"]; // key trong appsettings.json
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
-    };
-});
-
-// 👇 Add Authorization
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
-
-    // 👇 Add JWT Bearer definition
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n" +
-                      "Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\n" +
-                      "Example: \"Bearer abc123\"",
-        Name = "Authorization",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
-    });
-
-    // 👇 Apply the Bearer token globally to all operations
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
-});
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Cấu hình đường dẫn yêu cầu HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -94,6 +71,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Áp dụng CORS
+app.UseCors("AllowFrontend");
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

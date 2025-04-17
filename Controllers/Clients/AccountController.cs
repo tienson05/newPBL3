@@ -1,7 +1,10 @@
 ﻿using HeThongMoiGioiDoCu.Dtos.Account;
 using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Mapper;
+using HeThongMoiGioiDoCu.Models;
+using HeThongMoiGioiDoCu.Repository.UserRepo;
 using HeThongMoiGioiDoCu.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,24 +13,26 @@ using System.Text;
 
 namespace HeThongMoiGioiDoCu.Controllers.Clients
 {
+
     [Route("api/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IClientRepository _clientRepository;
         private readonly AccountService _accountService;
-        private readonly IConfiguration _configuration;
+        private readonly JwtTokenProviderService _jwtTokenProviderService;
 
-        public AccountController(IUserRepository userRepository, AccountService accountService)
+        public AccountController(AccountService accountService, JwtTokenProviderService jwtTokenProviderService, IClientRepository clientRepository)
         {
-            _userRepository = userRepository;
             _accountService = accountService;
+            _jwtTokenProviderService = jwtTokenProviderService;
+            _clientRepository = clientRepository;
         }
 
         [HttpPost("signup")]
         public async Task<IActionResult> Signup([FromForm] SignupDto signupDto)
         {
-            var existingEmail = await _userRepository.GetUserByEmailAsync(signupDto.Gmail);
+            var existingEmail = await _clientRepository.GetUserByEmailAsync(signupDto.Gmail);
 
             if (existingEmail != null)
             {
@@ -38,25 +43,17 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
 
             var user = signupDto.MapToUser(hashedPassword);
 
-            await _userRepository.AddUserAsync(user);
+            await _clientRepository.AddUserAsync(user);
 
-            return CreatedAtAction(
-                nameof(Signin),
-                new { controller = "Account" },
-                new
-                {
-                    message = "Registration successful. You can now log in.",
-                    loginUrl = "/api/account/signin",
-                }
-            );
+            return Ok("Signup successfully!");
         }
 
         [HttpPost("signin")]
-        public async Task<IActionResult> Signin([FromForm] SigninDto signinDto)
+        public async Task<IActionResult> Signin([FromBody] SigninDto signinDto)
         {
             if (string.IsNullOrWhiteSpace(signinDto.Email))
             {
-                return BadRequest("Email is required!");
+                return BadRequest("Email is required hehrhrh!");
             }
 
             if (string.IsNullOrWhiteSpace(signinDto.Password))
@@ -64,31 +61,36 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
                 return BadRequest("Password is required!");
             }
 
-            var user = await _userRepository.GetUserByEmailAsync(signinDto.Email);
+            var user = await _clientRepository.GetUserByEmailAsync(signinDto.Email);
 
-            if (user == null || user.Role == "Admin")
+            if (user == null || user.Role == 1 || user.Role == 4)
             {
                 return NotFound("User not found!");
             }
 
             if (_accountService.VerifyPassword(user.PasswordHash, signinDto.Password))
             {
-                return Ok(user.MapToUserViewDto());
+                var token = _jwtTokenProviderService.GenerateToken(user.Name, user.UserID, user.Role);
+                return Ok(new { token, user = user.MapToUserViewDto() });
             }
 
             return Unauthorized("Invalid password!");
         }
 
-        [HttpPost("logout")]
+        [Authorize]
+        [HttpPost("logout")] 
         public async Task<IActionResult> Logout()
         {
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await _clientRepository.UpdateLastLoginAsync(Convert.ToInt32(userId));
             return Ok(new { message = "Logged out successfully!" });
         }
 
-        [HttpGet("{id}")]
+        [Authorize]
+        [HttpGet]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
-            var user = await _userRepository.GetUserByIdAsync(id);
+            var user = await _clientRepository.GetUserByIdAsync(id);
             if (user == null)
             {
                 return NotFound("User not found");
@@ -102,28 +104,68 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             return Ok(user.MapToUserViewDto());
         }
 
-        [HttpGet("update/{id}")]
-        public async Task<IActionResult> GetUserInfor([FromRoute] int id)
-        {
-            var user = await _userRepository.GetUserByIdAsync(id);
-            if (user == null)
-                return NotFound("User not exist");
 
-            return Ok(user.MapToUpdateUserDto());
+        [Authorize]
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto updateUserDto)
+        {
+            //var userName = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            //var userRole = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = updateUserDto.MapToUser(Convert.ToInt32(userId));
+            await _clientRepository.UpdateUserAsync(user);
+
+            return Ok("Updated successfully!");
         }
 
-        [HttpPut("update/{id}")]
-        public async Task<IActionResult> UpdateUser(
-            [FromBody] UpdateUserDto updateUserDto,
-            [FromRoute] int id
-        )
+        //[Authorize]
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchUser([FromQuery] SearchUserDto searchUserDto) {
+            if (searchUserDto == null)
+            {
+                return BadRequest("Invalid search parameters.");
+            }
+            
+            List<Users> users = await _clientRepository.SearchUserAsync(searchUserDto.MapToUser());
+            List<UserViewDto> userList = new List<UserViewDto>();
+            if (users.Count == 0) return NotFound("Users not found!");
+            else
+            {
+                foreach (var user in users)
+                {
+                    userList.Add(user.MapToUserViewDto());
+                }
+            }
+            return Ok(userList.ToList());
+        }
+
+        //[Authorize]
+        [HttpPost("registerseller")]
+        public async Task<IActionResult> RegisterSeller()
         {
-            //var user = UserMappers.MapToUser(updateUserDto, id);
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            await _clientRepository.RegisterSeller(Convert.ToInt32(userId));
+            return Ok();
+        }
 
-            var user = updateUserDto.MapToUser(id);
-            await _userRepository.UpdateUserAsync(user);
+        [HttpPut("resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPasswordDto)
+        {
+            var userId = User?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = await _clientRepository.GetUserByIdAsync(Convert.ToInt32(userId));
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
 
-            return NoContent();
+            string hashedCurrentPassword = _accountService.HashPassword(resetPasswordDto.CurrentPassword);
+
+            if (!_accountService.VerifyPassword(user.PasswordHash, hashedCurrentPassword))
+            {
+                return BadRequest("Password is incorrect");
+            }
+            await _clientRepository.ResetPasswordAsync(resetPasswordDto.NewPassword, Convert.ToInt32(userId));
+            return Ok();
         }
 
 
