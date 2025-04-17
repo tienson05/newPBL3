@@ -6,7 +6,10 @@ using HeThongMoiGioiDoCu.Repository.UserRepo;
 using HeThongMoiGioiDoCu.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 
 namespace HeThongMoiGioiDoCu.Controllers.Clients
 {
@@ -164,5 +167,39 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             await _clientRepository.ResetPasswordAsync(resetPasswordDto.NewPassword, Convert.ToInt32(userId));
             return Ok();
         }
+
+
+        [HttpPost("gentoken")]
+        public IActionResult GenerateTestToken([FromBody] GenerateTokenRequest request)
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YTE4MTAxNWUyZGI0YzE0YmJlNWEyZjNkYTgyNzc1MTg2NWQzNGI1NTg1NzkwYTgyN2NjZjkwYjRhZDNkYjc2YQ=="));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+            new Claim(ClaimTypes.NameIdentifier, request.UserID.ToString()),
+            new Claim(ClaimTypes.Name, request.Username),
+            new Claim(ClaimTypes.Role, request.Role)
+        };
+
+            var token = new JwtSecurityToken(
+                issuer: "yourapp.com",
+                audience: "yourapp.com",
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: creds
+            );
+
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+            return Ok(new { token = tokenString });
+        }
+    }
+
+
+    public class GenerateTokenRequest
+    {
+        public int UserID { get; set; }
+        public string Username { get; set; }
+        public string Role { get; set; } = "User";
     }
 }

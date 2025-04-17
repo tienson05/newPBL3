@@ -1,66 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Projects\\Code\\newPBL3\\",
+  "WorkspaceRootPath": "E:\\Hoctap\\PBL3\\newPBL3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\updateuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|e:\\hoctap\\pbl3\\newpbl3\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\signupdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\signupdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\controllers\\clients\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:controllers\\clients\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\searchuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\searchuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\updateuserofadmindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\updateuserofadmindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\createuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\createuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\userviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\userviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\dtos\\account\\signindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:dtos\\account\\signindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\controllers\\admin\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:controllers\\admin\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\repository\\userrepo\\adminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:repository\\userrepo\\adminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\interfaces\\iadminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:interfaces\\iadminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\controllers\\clients\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:controllers\\clients\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\controllers\\clients\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:controllers\\clients\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\repository\\userrepo\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|e:\\hoctap\\pbl3\\newpbl3\\repository\\userrepo\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:repository\\userrepo\\clientrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|d:\\projects\\code\\newpbl3\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8D3C556-BE27-462F-A846-E3B7FEBFB5FA}|HeThongMoiGioiDoCu.csproj|solutionrelative:models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -69,225 +17,38 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "DockedWidth": 61,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UpdateUserDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\UpdateUserDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\UpdateUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T06:39:17.767Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SignupDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SignupDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\SignupDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SignupDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\SignupDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T06:38:57.22Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SearchUserDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SearchUserDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\SearchUserDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SearchUserDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\SearchUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T06:23:26.795Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UpdateUserOfAdminDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserOfAdminDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\UpdateUserOfAdminDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UpdateUserOfAdminDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\UpdateUserOfAdminDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T06:01:44.635Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CreateUserDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\CreateUserDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\CreateUserDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\CreateUserDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\CreateUserDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Order.cs",
+              "DocumentMoniker": "E:\\Hoctap\\PBL3\\newPBL3\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "Models\\Order.cs",
+              "ToolTip": "E:\\Hoctap\\PBL3\\newPBL3\\Models\\Order.cs",
+              "RelativeToolTip": "Models\\Order.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwA0AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T06:21:34.773Z",
+              "WhenOpened": "2025-04-17T06:55:00.867Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UserViewDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UserViewDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\UserViewDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\UserViewDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\UserViewDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T06:20:24.578Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SigninDto.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SigninDto.cs",
-              "RelativeDocumentMoniker": "Dtos\\Account\\SigninDto.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Dtos\\Account\\SigninDto.cs",
-              "RelativeToolTip": "Dtos\\Account\\SigninDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T06:19:17.075Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Controllers\\Admin\\AccountController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Admin\\AccountController.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Controllers\\Admin\\AccountController.cs",
-              "RelativeToolTip": "Controllers\\Admin\\AccountController.cs",
-              "ViewState": "AgIAAGgAAAAAAAAAAAAmwHwAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-05T13:16:40.102Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "IAdminRepository.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Interfaces\\IAdminRepository.cs",
-              "RelativeDocumentMoniker": "Interfaces\\IAdminRepository.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Interfaces\\IAdminRepository.cs",
-              "RelativeToolTip": "Interfaces\\IAdminRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T06:02:29.502Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "CategoryController.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\CategoryController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Clients\\CategoryController.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\CategoryController.cs",
-              "RelativeToolTip": "Controllers\\Clients\\CategoryController.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAAABYAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-06T14:19:16.61Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\AccountController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Clients\\AccountController.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\AccountController.cs",
-              "RelativeToolTip": "Controllers\\Clients\\AccountController.cs",
-              "ViewState": "AgIAAGsAAAAAAAAAAAAswIoAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-05T14:45:52.112Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AdminRepository.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Repository\\UserRepo\\AdminRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\UserRepo\\AdminRepository.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Repository\\UserRepo\\AdminRepository.cs",
-              "RelativeToolTip": "Repository\\UserRepo\\AdminRepository.cs",
-              "ViewState": "AgIAABYBAAAAAAAAAAAUwCEBAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-05T10:18:48.908Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ProductsController.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\ProductsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Clients\\ProductsController.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Controllers\\Clients\\ProductsController.cs",
-              "RelativeToolTip": "Controllers\\Clients\\ProductsController.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-06T07:15:46.75Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Users.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Models\\Users.cs",
-              "RelativeDocumentMoniker": "Models\\Users.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Models\\Users.cs",
-              "RelativeToolTip": "Models\\Users.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA/wBwAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-05T13:09:54.644Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 1,
               "Title": "ClientRepository.cs",
-              "DocumentMoniker": "D:\\Projects\\Code\\newPBL3\\Repository\\UserRepo\\ClientRepository.cs",
+              "DocumentMoniker": "E:\\Hoctap\\PBL3\\newPBL3\\Repository\\UserRepo\\ClientRepository.cs",
               "RelativeDocumentMoniker": "Repository\\UserRepo\\ClientRepository.cs",
-              "ToolTip": "D:\\Projects\\Code\\newPBL3\\Repository\\UserRepo\\ClientRepository.cs",
+              "ToolTip": "E:\\Hoctap\\PBL3\\newPBL3\\Repository\\UserRepo\\ClientRepository.cs",
               "RelativeToolTip": "Repository\\UserRepo\\ClientRepository.cs",
-              "ViewState": "AgIAAJoAAAAAAAAAAAAwwNkAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-05T13:44:06.254Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 143,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 349,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "WhenOpened": "2025-04-17T06:54:18.743Z",
+              "EditorCaption": ""
             }
           ]
         }

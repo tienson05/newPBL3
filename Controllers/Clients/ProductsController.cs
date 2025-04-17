@@ -2,13 +2,16 @@
 using HeThongMoiGioiDoCu.Interfaces;
 using HeThongMoiGioiDoCu.Models;
 using HeThongMoiGioiDoCu.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace HeThongMoiGioiDoCu.Controllers.Clients
 {
     [Route("api/product")]
     [ApiController]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
@@ -23,6 +26,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             _accountService = accountService;
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpGet]
         public async Task<ActionResult> GetProducts(
             [FromQuery] int? category_id = null,
@@ -33,6 +37,8 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             [FromQuery] string? keyword = null
         )
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            Console.Write("aaaaa" + userIdClaim);
             var result = await _productRepository.GetListProduct(
                 category_id.HasValue ? category_id.Value : null,
                 user_id.HasValue ? user_id.Value : null,
@@ -78,6 +84,7 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
                 : NotFound("Product Not Found!");
         }
 
+        [Authorize(Roles="Admin")]
         [HttpPost("{id}/approved")]
         public async Task<ActionResult> ApprovedProduct(int id)
         {

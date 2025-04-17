@@ -17,6 +17,22 @@
   },
   {
     "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.AccountController",
+    "Method": "GenerateTestToken",
+    "RelativePath": "api/account/gentoken",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HeThongMoiGioiDoCu.Controllers.Clients.GenerateTokenRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.AccountController",
     "Method": "Logout",
     "RelativePath": "api/account/logout",
     "HttpMethod": "POST",
@@ -33,6 +49,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.AccountController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/account/resetpassword",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetPasswordDto",
+        "Type": "HeThongMoiGioiDoCu.Dtos.Account.ResetPasswordDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -182,6 +214,22 @@
   },
   {
     "ContainingType": "HeThongMoiGioiDoCu.Controllers.Admin.AccountController",
+    "Method": "Ban",
+    "RelativePath": "api/admin/account/ban/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Admin.AccountController",
     "Method": "CreateUser",
     "RelativePath": "api/admin/account/create",
     "HttpMethod": "POST",
@@ -284,6 +332,22 @@
   },
   {
     "ContainingType": "HeThongMoiGioiDoCu.Controllers.Admin.AccountController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/admin/account/resetpassword",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetPasswordDto",
+        "Type": "HeThongMoiGioiDoCu.Dtos.Account.ResetPasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Admin.AccountController",
     "Method": "SearchUser",
     "RelativePath": "api/admin/account/search",
     "HttpMethod": "GET",
@@ -324,6 +388,22 @@
       {
         "Name": "signinDto",
         "Type": "HeThongMoiGioiDoCu.Dtos.Account.SigninDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Admin.AccountController",
+    "Method": "UndoBan",
+    "RelativePath": "api/admin/account/undoban/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -434,8 +514,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "category",
-        "Type": "HeThongMoiGioiDoCu.Models.Category",
+        "Name": "dto",
+        "Type": "HeThongMoiGioiDoCu.Dtos.Category.CategoryDto",
         "IsRequired": true
       }
     ],
@@ -510,6 +590,131 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.OrderController",
+    "Method": "AddOrder",
+    "RelativePath": "api/order",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "HeThongMoiGioiDoCu.Dtos.Order.OrderDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HeThongMoiGioiDoCu.Models.Order",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.OrderController",
+    "Method": "GetOrderByID",
+    "RelativePath": "api/order/id",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HeThongMoiGioiDoCu.Models.Order",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.OrderController",
+    "Method": "DeleteOrder",
+    "RelativePath": "api/order/id",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.OrderController",
+    "Method": "UpdateOrder",
+    "RelativePath": "api/order/id",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "dto",
+        "Type": "HeThongMoiGioiDoCu.Dtos.Order.OrderUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HeThongMoiGioiDoCu.Models.Order",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HeThongMoiGioiDoCu.Controllers.Clients.OrderController",
+    "Method": "GetListOrderByUserID",
+    "RelativePath": "api/order/userid",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
