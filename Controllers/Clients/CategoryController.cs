@@ -27,11 +27,18 @@ namespace HeThongMoiGioiDoCu.Controllers.Clients
             return await _categoryRepository.GetListCategory();
         }
         [HttpPost]
-        public async Task<IActionResult> AddCategory([FromBody] Category category)
+        public async Task<IActionResult> AddCategory([FromBody] CategoryDto dto)
         {
+            var category = new Category
+            {
+                CategoryName = dto.CategoryName,
+                CreatedAt = DateTime.Now
+            };
+
             var createdCategory = await _categoryRepository.AddCategory(category);
-            var createdCategoryDto = createdCategory.MapToCategoryDto();
-            return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.CategoryID }, createdCategoryDto);
+            var categoryDto = createdCategory.MapToCategoryDto();
+
+            return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.CategoryID }, categoryDto);
         }
 
         [HttpGet("{id}")]
